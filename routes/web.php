@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AskebController;
+use App\Http\Controllers\DosenAskebController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,4 +51,21 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware(['auth','role:mahasiswa'])->group(function () {
     Route::resource('askeb', AskebController::class);
 });
+
+Route::middleware(['auth'])->group(function () {
+
+    Route::get('/dosen/askeb/{id}', 
+        [DosenAskebController::class, 'show']
+    )->name('dosen.askeb.show');
+
+});
+
+Route::post('/dosen/askeb/{id}/revisi',
+    [DosenAskebController::class, 'revisi']
+)->name('dosen.askeb.revisi');
+
+
+Route::post('/dosen/askeb/{id}/acc',
+    [DosenAskebController::class, 'acc']
+)->name('dosen.askeb.acc');
 require __DIR__.'/auth.php';

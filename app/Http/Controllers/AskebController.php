@@ -8,17 +8,21 @@ use Illuminate\Http\Request;
 
 class AskebController extends Controller
 {
-    public function index()
-    {
-        $askebs = Askeb::where('mahasiswa_id', auth()->id())->latest()->get();
-        return view('mahasiswa.askeb.index', compact('askebs'));
-    }
+public function index()
+{
+$askebs = Askeb::where('mahasiswa_id', auth()->id())
+                ->latest()
+                ->get();
 
-    public function create()
-    {
-        $dosens = Dosen::all();
-        return view('mahasiswa.askeb.create', compact('dosens'));
-    }
+    return view('mahasiswa.askeb.index', compact('askebs'));
+}
+
+public function create()
+{
+    $dosens = \App\Models\User::where('role', 'dosen')->get();
+
+    return view('mahasiswa.askeb.create', compact('dosens'));
+}
 
     public function store(Request $request)
     {
@@ -32,4 +36,12 @@ class AskebController extends Controller
         return redirect()->route('askeb.index')
                          ->with('success','ASKEB berhasil dikirim ke dosen.');
     }
+
+    public function show($id)
+{
+    $askeb = \App\Models\Askeb::where('mahasiswa_id', auth()->id())
+                ->findOrFail($id);
+
+    return view('mahasiswa.askeb.show', compact('askeb'));
+}
 }

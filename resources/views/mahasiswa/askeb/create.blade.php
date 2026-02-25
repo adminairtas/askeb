@@ -14,12 +14,21 @@
 
         <div>
             <label class="block font-semibold">Pilih Dosen Pembimbing</label>
-            <select name="dosen_id" class="w-full mt-2 border rounded p-2" required>
-                <option value="">-- Pilih Dosen --</option>
-                @foreach($dosens as $dosen)
-                    <option value="{{ $dosen->id }}">{{ $dosen->nama }}</option>
-                @endforeach
-            </select>
+           <select name="dosen_id"
+        required
+        class="w-full border rounded-lg px-3 py-2 mt-1 bg-white text-black">
+
+    <option value="" class="text-black">
+        -- Pilih Dosen --
+    </option>
+
+    @foreach($dosens as $dosen)
+        <option value="{{ $dosen->id }}" class="text-black">
+            {{ $dosen->name }}
+        </option>
+    @endforeach
+
+</select>
         </div>
 
         <div class="mt-4">

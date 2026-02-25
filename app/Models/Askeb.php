@@ -25,4 +25,9 @@ class Askeb extends Model
     {
         return $this->belongsTo(Dosen::class);
     }
+
+    public function revisis()
+{
+    return $this->hasMany(\App\Models\AskebRevisi::class);
+}
 }
