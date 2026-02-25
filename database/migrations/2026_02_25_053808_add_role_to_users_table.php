@@ -15,7 +15,7 @@ public function up()
         $table->enum('role', ['admin','dosen','mahasiswa'])
               ->default('mahasiswa');
     });
-}php artisan migrate
+}
 
     /**
      * Reverse the migrations.
