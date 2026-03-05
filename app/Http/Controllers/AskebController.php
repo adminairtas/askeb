@@ -158,4 +158,5 @@ public function downloadPdf($id)
     return $pdf->download('ASKEB-'.$askeb->id.'.pdf');
 }
 
+
 }
