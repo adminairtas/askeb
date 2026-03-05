@@ -69,3 +69,10 @@ Route::post('/dosen/askeb/{id}/acc',
     [DosenAskebController::class, 'acc']
 )->name('dosen.askeb.acc');
 require __DIR__.'/auth.php';
+
+Route::resource('askeb', AskebController::class)
+    ->middleware(['auth','role:mahasiswa']);
+
+    Route::get('/mahasiswa/askeb/{id}/pdf', 
+    [AskebController::class, 'downloadPdf']
+)->name('mahasiswa.askeb.pdf');

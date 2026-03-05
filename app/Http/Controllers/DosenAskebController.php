@@ -10,9 +10,8 @@ class DosenAskebController extends Controller
 {
     public function show($id)
     {
-        $askeb = Askeb::with('mahasiswa')
-                    ->where('dosen_id', auth()->id())
-                    ->findOrFail($id);
+        $askeb = Askeb::with(['mahasiswa','revisis'])
+                        ->findOrFail($id);
 
         return view('dosen.askeb_show', compact('askeb'));
     }

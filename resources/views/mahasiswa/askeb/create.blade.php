@@ -33,14 +33,12 @@
 
         <div class="mt-4">
             <label class="block font-semibold">Isi ASKEB</label>
-            <textarea name="isi" rows="6" class="w-full mt-2 border rounded p-2" required></textarea>
-        </div>
+<br>
 
-        <button class="mt-4 bg-purple-600 text-white px-4 py-2 rounded">
-            Kirim ke Dosen
-        </button>
-    </form>
+<form action="{{ route('askeb.store') }}" method="POST">
+    @csrf
 
-</div>
+    @include('mahasiswa.askeb._form')
+</form>
 
 </x-app-layout>

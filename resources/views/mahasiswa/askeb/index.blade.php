@@ -32,7 +32,7 @@
                         @forelse ($askebs as $askeb)
                         <tr class="border-b">
                             <td class="px-6 py-3">{{ $loop->iteration }}</td>
-                            <td class="px-6 py-3">{{ $askeb->nama_pasien }}</td>
+                            <td class="px-6 py-3">{{ $askeb->nama_ibu}}</td>
                             <td class="px-6 py-3">{{ $askeb->created_at->format('d-m-Y') }}</td>
                             <td class="px-6 py-3">
                                 <span class="px-3 py-1 rounded-full text-white
@@ -44,13 +44,16 @@
                                     {{ strtoupper($askeb->status) }}
                                 </span>
                             </td>
-                            <td class="px-6 py-3">
-                                <a href="{{ route('askeb.show', $askeb->id) }}"
-                                   class="text-purple-600 hover:underline">
-                                   Detail
-                                </a>
-                            </td>
-                        </tr>
+                           <td class="px-6 py-3 space-y-1">
+
+    {{-- Tombol Detail --}}
+    <a href="{{ route('askeb.show', $askeb->id) }}"
+       class="text-blue-600 hover:underline block">
+        Detail
+    </a>
+
+</td>
+                        
                         @empty
                         <tr>
                             <td colspan="5" class="text-center py-6 text-gray-500">

@@ -10,7 +10,7 @@
                 DASHBOARD DOSEN
             </h1>
             <p class="text-sm">
-                E-ASKEB KEHAMILAN – PRODI KEBIDANAN
+                E-ASKEB KEHAMILAN - PRODI KEBIDANAN
             </p>
             <p class="mt-2">
                 Selamat datang, {{ auth()->user()->name }}
