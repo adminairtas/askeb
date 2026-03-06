@@ -7,7 +7,7 @@
 
 @page{
     size:A4;
-    margin:2cm;
+    margin:2.5cm 2cm 2.5cm 2cm;
 }
 
 body{
@@ -16,13 +16,18 @@ body{
     line-height:1.5;
 }
 
-.title{
-    text-align:right;
+.header{
+    text-align:center;
     font-weight:bold;
 }
 
-.section{
+.title{
+    text-align:right;
     margin-top:10px;
+}
+
+.section{
+    margin-top:12px;
     font-weight:bold;
 }
 
@@ -45,17 +50,36 @@ td{
     padding:4px;
 }
 
+.footer{
+    position: fixed;
+    bottom: -20px;
+    left:0;
+    right:0;
+    text-align:center;
+    font-size:11px;
+}
+
+.pagenum:before{
+    content: counter(page);
+}
+
 </style>
+
 </head>
 
 <body>
 
-{{-- ===================== --}}
-{{-- HALAMAN 1 --}}
-{{-- ===================== --}}
+{{-- HEADER --}}
+<div class="header">
+
+LAPORAN ANC<br>
+PROGRAM STUDI KEBIDANAN<br>
+ISTEK ICSADA BOJONEGORO
+
+</div>
 
 <div class="title">
-LAPORAN ANC : No {{ $askeb->id }}
+No : {{ $askeb->id }}
 </div>
 
 <br>
@@ -66,8 +90,8 @@ LAPORAN ANC : No {{ $askeb->id }}
 
 <table>
 <tr>
-<td width="25%">Tanggal pengkajian</td>
-<td>: {{ $askeb->tanggal_pengkajian }}</td>
+<td width="25%">Tanggal Pengkajian</td>
+<td>: {{ \Carbon\Carbon::parse($askeb->tanggal_pengkajian)->translatedFormat('d F Y') }}</td>
 
 <td width="10%">Pukul</td>
 <td>: {{ $askeb->pukul }} WIB</td>
@@ -81,6 +105,7 @@ LAPORAN ANC : No {{ $askeb->id }}
 <td>: {{ $askeb->mahasiswa->name }}</td>
 </tr>
 </table>
+
 
 <div class="section">A. DATA SUBYEKTIF</div>
 
@@ -98,10 +123,10 @@ LAPORAN ANC : No {{ $askeb->id }}
 
 <tr>
 <td>Umur</td>
-<td>: {{ $askeb->umur_ibu }}</td>
+<td>: {{ $askeb->umur_ibu }} tahun</td>
 
 <td>Umur</td>
-<td>: {{ $askeb->umur_suami }}</td>
+<td>: {{ $askeb->umur_suami }} tahun</td>
 </tr>
 
 <tr>
@@ -146,6 +171,7 @@ LAPORAN ANC : No {{ $askeb->id }}
 <br>
 
 <b>Keluhan Utama</b><br>
+
 {{ $askeb->keluhan }}
 
 <br><br>
@@ -153,13 +179,14 @@ LAPORAN ANC : No {{ $askeb->id }}
 <b>Riwayat Menstruasi</b>
 
 <table>
+
 <tr>
 <td width="25%">Menarche</td>
 <td>: {{ $askeb->menarche }} tahun</td>
 </tr>
 
 <tr>
-<td>Siklus haid</td>
+<td>Siklus</td>
 <td>: {{ $askeb->siklus }}</td>
 </tr>
 
@@ -172,17 +199,15 @@ LAPORAN ANC : No {{ $askeb->id }}
 <td>Jumlah</td>
 <td>: {{ $askeb->jumlah_haid }} cc</td>
 </tr>
+
+<tr>
+<td>Karakteristik</td>
+<td>: {{ $askeb->karakteristik }}</td>
+</tr>
+
 </table>
 
 <br>
-
-<b>Riwayat Perkawinan</b><br>
-
-Usia pertama menikah : {{ $askeb->usia_pertama_menikah }} tahun<br>
-Lama menikah : {{ $askeb->lama_menikah }} tahun<br>
-Status pernikahan : {{ $askeb->status_pernikahan }}
-
-<br><br>
 
 <b>Riwayat Obstetri</b>
 
@@ -197,12 +222,13 @@ Status pernikahan : {{ $askeb->status_pernikahan }}
 <th>JK</th>
 <th>BB/PB</th>
 <th>Umur</th>
-<th>Keterangan</th>
+<th>Ket</th>
 <th>Laktasi</th>
 <th>Penyulit</th>
 </tr>
 
 @foreach($askeb->obstetris as $o)
+
 <tr>
 <td>{{ $loop->iteration }}</td>
 <td>{{ $o->kehamilan }}</td>
@@ -216,6 +242,7 @@ Status pernikahan : {{ $askeb->status_pernikahan }}
 <td>{{ $o->laktasi }}</td>
 <td>{{ $o->penyulit }}</td>
 </tr>
+
 @endforeach
 
 </table>
@@ -223,24 +250,12 @@ Status pernikahan : {{ $askeb->status_pernikahan }}
 
 <div style="page-break-before: always;"></div>
 
-
-{{-- ===================== --}}
-{{-- HALAMAN 2 --}}
-{{-- ===================== --}}
-
 <div class="section">B. DATA OBYEKTIF</div>
-
-<b>Pemeriksaan Umum</b>
 
 <table>
 
 <tr>
-<td width="25%">Kesadaran</td>
-<td>: {{ $askeb->kesadaran }}</td>
-</tr>
-
-<tr>
-<td>Tekanan darah</td>
+<td width="25%">Tekanan darah</td>
 <td>: {{ $askeb->tekanan_darah }}</td>
 </tr>
 
@@ -271,113 +286,8 @@ Status pernikahan : {{ $askeb->status_pernikahan }}
 
 </table>
 
-<br>
-
-<b>Pemeriksaan Fisik</b>
-
-<table>
-
-<tr>
-<td width="25%">Kepala</td>
-<td>: {{ $askeb->kepala }}</td>
-</tr>
-
-<tr>
-<td>Muka</td>
-<td>: {{ $askeb->muka }}</td>
-</tr>
-
-<tr>
-<td>Mata</td>
-<td>: {{ $askeb->mata }}</td>
-</tr>
-
-<tr>
-<td>Hidung</td>
-<td>: {{ $askeb->hidung }}</td>
-</tr>
-
-<tr>
-<td>Mulut</td>
-<td>: {{ $askeb->mulut }}</td>
-</tr>
-
-<tr>
-<td>Leher</td>
-<td>: {{ $askeb->leher }}</td>
-</tr>
-
-<tr>
-<td>Dada</td>
-<td>: {{ $askeb->dada }}</td>
-</tr>
-
-<tr>
-<td>Abdomen</td>
-<td>: {{ $askeb->abdomen }}</td>
-</tr>
-
-</table>
-
 
 <div style="page-break-before: always;"></div>
-
-
-{{-- ===================== --}}
-{{-- HALAMAN 3 --}}
-{{-- ===================== --}}
-
-<b>Pemeriksaan Leopold</b>
-
-<table>
-
-<tr>
-<td width="25%">Leopold I</td>
-<td>: {{ $askeb->leopold1 }}</td>
-</tr>
-
-<tr>
-<td>Leopold II</td>
-<td>: {{ $askeb->leopold2 }}</td>
-</tr>
-
-<tr>
-<td>Leopold III</td>
-<td>: {{ $askeb->leopold3 }}</td>
-</tr>
-
-<tr>
-<td>Leopold IV</td>
-<td>: {{ $askeb->leopold4 }}</td>
-</tr>
-
-<tr>
-<td>TBJ</td>
-<td>: {{ $askeb->tbj }}</td>
-</tr>
-
-<tr>
-<td>DJJ</td>
-<td>: {{ $askeb->djj }}</td>
-</tr>
-
-</table>
-
-<br>
-
-<b>Pemeriksaan Laboratorium</b>
-
-Tanggal : {{ $askeb->tanggal_lab }}<br>
-Tempat : {{ $askeb->tempat_lab }}<br>
-Hasil : {{ $askeb->hasil_lab }}
-
-
-<div style="page-break-before: always;"></div>
-
-
-{{-- ===================== --}}
-{{-- HALAMAN 4 --}}
-{{-- ===================== --}}
 
 <div class="section">C. ANALISIS DATA</div>
 
@@ -408,7 +318,7 @@ Jam : {{ $askeb->jam_penatalaksanaan }}
 <td width="60%"></td>
 <td align="center">
 
-Bojonegoro, {{ date('d-m-Y') }}
+Bojonegoro, {{ \Carbon\Carbon::now()->translatedFormat('d F Y') }}
 
 <br><br>
 
@@ -421,6 +331,13 @@ Pembimbing Institusi
 </td>
 </tr>
 </table>
+
+
+<div class="footer">
+
+Halaman <span class="pagenum"></span>
+
+</div>
 
 </body>
 </html>
