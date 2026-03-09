@@ -175,14 +175,14 @@
                     7. Riwayat Kehamilan Sekarang
                 </h3>
 
-                <div class="grid grid-cols-3 gap-6 mb-6 text-sm">
+                <div class="grid grid-cols-2 gap-6 mb-6 text-sm">
 
                     <div>
                         <span class="font-medium">HPHT :</span>
                         <p>
                             {{ $askeb->hpht 
-                    ? \Carbon\Carbon::parse($askeb->hpht)->translatedFormat('d F Y') 
-                    : '-' }}
+                ? \Carbon\Carbon::parse($askeb->hpht)->translatedFormat('d F Y') 
+                : '-' }}
                         </p>
                     </div>
 
@@ -190,302 +190,303 @@
                         <span class="font-medium">HPL :</span>
                         <p>
                             {{ $askeb->hpl 
-                    ? \Carbon\Carbon::parse($askeb->hpl)->translatedFormat('d F Y') 
-                    : '-' }}
+                ? \Carbon\Carbon::parse($askeb->hpl)->translatedFormat('d F Y') 
+                : '-' }}
                         </p>
                     </div>
 
-                    <div>
-                        <span class="font-medium">Jumlah Periksa :</span>
-                        <p>{{ $askeb->jumlah_periksa ?? '-' }} kali</p>
+                </div>
+
+                <div class="mb-4 text-sm leading-relaxed">
+
+                    <p>
+                        Selama hamil ibu memeriksakan kehamilan <span class="font-semibold">{{ $askeb->jumlah_periksa ?? '-' }}</span> kali, status imunisasi (TT) <span class="font-semibold">{{ $askeb->status_imunisasi_tt ?? '-' }}</span>, jumlah tablet MMS yang telah diminum<span class="font-semibold">{{ $askeb->jumlah_mms ?? '-' }}</span> butir. Ibu merasakan gerak janin pada usia <span class="font-semibold">{{ $askeb->gerak_janin_usia ?? '-' }}</span> minggu/bulan. Keluhan yang pernah dirasakan selama kehamilan yaitu <span class="font-semibold">{{ $askeb->keluhan_hamil ?? '-' }}</span>. Obat yang didapat oleh ibu yaitu <span class="font-semibold">{{ $askeb->obat_didapat ?? '-' }}</span>.
+                    </p>
+
+                </div>
+
+                <h3 class="font-semibold text-lg mb-3">
+
+
+
+                    <hr class="my-6">
+                    <h3 class="font-semibold text-lg mb-3">
+                        8. Riwayat Kesehatan Ibu
+                    </h3>
+
+                    <div class="mb-6 text-sm">
+                        {{ $askeb->riwayat_kesehatan_ibu ?? '-' }}
                     </div>
 
-                </div>
+                    <hr class="my-6">
 
-                <div class="mb-6 text-sm">
-                    <span class="font-medium">Keluhan Selama Hamil :</span>
-                    <p>{{ $askeb->keluhan_hamil ?? '-' }}</p>
-                </div>
+                    <h3 class="font-semibold text-lg mb-3">
+                        9. Riwayat Kesehatan Keluarga
+                    </h3>
 
-                <hr class="my-6">
-
-                <h3 class="font-semibold text-lg mb-3">
-                    8. Riwayat Kesehatan Ibu
-                </h3>
-
-                <div class="mb-6 text-sm">
-                    {{ $askeb->riwayat_kesehatan_ibu ?? '-' }}
-                </div>
-
-                <hr class="my-6">
-
-                <h3 class="font-semibold text-lg mb-3">
-                    9. Riwayat Kesehatan Keluarga
-                </h3>
-
-                <div class="mb-6 text-sm">
-                    {{ $askeb->riwayat_kesehatan_keluarga ?? '-' }}
-                </div>
-
-                <hr class="my-6">
-
-                <h3 class="font-semibold text-lg mb-3">
-                    10. Pola Fungsional Kesehatan
-                </h3>
-
-                <div class="mb-6 text-sm">
-                    {{ $askeb->pola_fungsional_kesehatan ?? '-' }}
-                </div>
-
-                <hr class="my-6">
-
-                <h3 class="font-semibold text-lg mb-3">
-                    11. Riwayat Sosial Budaya, Pengetahuan dan Spiritual
-                </h3>
-
-                <div class="grid grid-cols-2 gap-6 mb-6 text-sm">
-
-                    <div>
-                        <span class="font-medium">Kehamilan Ini :</span>
-                        <p>{{ $askeb->kehamilan_ini ?? '-' }}</p>
+                    <div class="mb-6 text-sm">
+                        {{ $askeb->riwayat_kesehatan_keluarga ?? '-' }}
                     </div>
 
-                    <div>
-                        <span class="font-medium">Kondisi Ibu :</span>
-                        <p>
-                            @if($askeb->kondisi_ibu_kehamilan == 'Senang')
-                            Senang dengan Kehamilannya
-                            @elseif($askeb->kondisi_ibu_kehamilan == 'Tidak_senang')
-                            Tidak Senang dengan Kehamilannya
-                            @else
-                            -
-                            @endif
+                    <hr class="my-6">
+
+                    <h3 class="font-semibold text-lg mb-3">
+                        10. Pola Fungsional Kesehatan
+                    </h3>
+
+                    <div class="mb-6 text-sm">
+                        {{ $askeb->pola_fungsional_kesehatan ?? '-' }}
+                    </div>
+
+                    <hr class="my-6">
+
+                    <h3 class="font-semibold text-lg mb-3">
+                        11. Riwayat Sosial Budaya, Pengetahuan dan Spiritual
+                    </h3>
+
+                    <div class="grid grid-cols-2 gap-6 mb-6 text-sm">
+
+                        <div>
+                            <span class="font-medium">Kehamilan Ini :</span>
+                            <p>{{ $askeb->kehamilan_ini ?? '-' }}</p>
+                        </div>
+
+                        <div>
+                            <span class="font-medium">Kondisi Ibu :</span>
+                            <p>
+                                @if($askeb->kondisi_ibu_kehamilan == 'Senang')
+                                Senang dengan Kehamilannya
+                                @elseif($askeb->kondisi_ibu_kehamilan == 'Tidak_senang')
+                                Tidak Senang dengan Kehamilannya
+                                @else
+                                -
+                                @endif
+                            </p>
+                        </div>
+
+                        <div>
+                            <span class="font-medium">Tradisi :</span>
+                            <p>{{ $askeb->Tradisi ?? '-' }}</p>
+                        </div>
+
+                        <div>
+                            <span class="font-medium">Spiritual :</span>
+                            <p>{{ $askeb->Spiritual ?? '-' }}</p>
+                        </div>
+
+                        <div>
+                            <span class="font-medium">Pengetahuan :</span>
+                            <p>{{ $askeb->Pengetahuan ?? '-' }}</p>
+                        </div>
+
+                    </div>
+
+                    <hr class="my-6">
+
+                    {{-- ================= DATA OBYEKTIF ================= --}}
+                    <h3 class="text-lg font-bold text-purple-700 mb-4">
+                        B. Data Obyektif
+                    </h3>
+
+                    {{-- ================= PEMERIKSAAN UMUM ================= --}}
+                    <h4 class="font-semibold mb-3">1. Pemeriksaan Umum</h4>
+
+                    <div class="grid grid-cols-2 gap-4 mb-6 text-sm">
+
+                        <div>
+                            <span class="font-medium">Kesadaran :</span>
+                            <p>{{ $askeb->kesadaran ?? '-' }}</p>
+                        </div>
+
+                        <div>
+                            <span class="font-medium">Tekanan Darah :</span>
+                            <p>{{ $askeb->tekanan_darah ?? '-' }}</p>
+                        </div>
+
+                        <div>
+                            <span class="font-medium">Denyut Nadi :</span>
+                            <p>{{ $askeb->denyut_nadi ?? '-' }}</p>
+                        </div>
+
+                        <div>
+                            <span class="font-medium">Pernafasan :</span>
+                            <p>{{ $askeb->pernafasan ?? '-' }}</p>
+                        </div>
+
+                        <div>
+                            <span class="font-medium">Suhu :</span>
+                            <p>{{ $askeb->suhu ?? '-' }}</p>
+                        </div>
+
+                        <div>
+                            <span class="font-medium">LILA :</span>
+                            <p>{{ $askeb->lila ?? '-' }}</p>
+                        </div>
+
+                        <div>
+                            <span class="font-medium">Berat/Tinggi Badan :</span>
+                            <p>{{ $askeb->berat_tinggi_badan ?? '-' }}</p>
+                        </div>
+
+                        <div>
+                            <span class="font-medium">Berat Sebelum Hamil :</span>
+                            <p>{{ $askeb->berat_sebelum_hamil ?? '-' }}</p>
+                        </div>
+
+                    </div>
+
+                    <hr class="my-6">
+
+                    <h4 class="font-semibold mb-3">2. Pemeriksaan Fisik</h4>
+
+                    <div class="space-y-4 text-sm">
+
+                        <div><span class="font-medium">A. Kepala :</span> {{ $askeb->kepala ?? '-' }}</div>
+                        <div><span class="font-medium">B. Muka :</span> {{ $askeb->muka ?? '-' }}</div>
+                        <div><span class="font-medium">C. Mata :</span> {{ $askeb->mata ?? '-' }}</div>
+                        <div><span class="font-medium">D. Hidung :</span> {{ $askeb->hidung ?? '-' }}</div>
+                        <div><span class="font-medium">E. Mulut :</span> {{ $askeb->mulut ?? '-' }}</div>
+                        <div><span class="font-medium">F. Leher :</span> {{ $askeb->leher ?? '-' }}</div>
+                        <div><span class="font-medium">G. Dada :</span> {{ $askeb->dada ?? '-' }}</div>
+
+                        <div>
+                            <span class="font-medium">H. Abdomen :</span>
+                            <p>{{ $askeb->abdomen ?? '-' }}</p>
+                        </div>
+
+                    </div>
+
+                    <div class="grid grid-cols-3 gap-4 mt-4 mb-6 text-sm">
+
+                        <div><span class="font-medium">Leopold I :</span> {{ $askeb->leopold_i ?? '-' }}</div>
+                        <div><span class="font-medium">Leopold II :</span> {{ $askeb->leopold_ii ?? '-' }}</div>
+                        <div><span class="font-medium">Leopold III :</span> {{ $askeb->leopold_iii ?? '-' }}</div>
+                        <div><span class="font-medium">Leopold IV :</span> {{ $askeb->leopold_iv ?? '-' }}</div>
+                        <div><span class="font-medium">TBJ :</span> {{ $askeb->tbj ?? '-' }}</div>
+                        <div><span class="font-medium">DJJ :</span> {{ $askeb->djj ?? '-' }}</div>
+
+                    </div>
+
+                    <div class="space-y-4 text-sm">
+
+                        <div><span class="font-medium">I. Genetalia :</span> {{ $askeb->genetalia ?? '-' }}</div>
+                        <div><span class="font-medium">J. Anus :</span> {{ $askeb->anus ?? '-' }}</div>
+                        <div><span class="font-medium">K. Ekstremitas :</span> {{ $askeb->ekstemitas ?? '-' }}</div>
+
+                    </div>
+
+                    <hr class="my-6">
+
+                    <h4 class="font-semibold mb-3">3. Pemeriksaan Panggul Luar</h4>
+
+                    <div class="grid grid-cols-2 gap-4 mb-6 text-sm">
+
+                        <div>
+                            <span class="font-medium">Distansia Spinarum :</span>
+                            <p>{{ $askeb->distansia_sinarum ?? '-' }}</p>
+                        </div>
+
+                        <div>
+                            <span class="font-medium">Distansia Kristarum :</span>
+                            <p>{{ $askeb->distansia_kristarum ?? '-' }}</p>
+                        </div>
+
+                        <div>
+                            <span class="font-medium">Konjugata Eksterna :</span>
+                            <p>{{ $askeb->konjugata_eksterna ?? '-' }}</p>
+                        </div>
+
+                        <div>
+                            <span class="font-medium">Lingkar Panggul :</span>
+                            <p>{{ $askeb->lingkar_panggul ?? '-' }}</p>
+                        </div>
+
+                    </div>
+
+                    <hr class="my-6">
+
+
+
+                    {{-- DIAGNOSIS --}}
+                    <h3 class="text-lg font-bold text-purple-700 mb-4">
+                        C. Analisis Data
+                    </h3>
+
+                    <p><strong>Diagnosis:</strong></p>
+                    <p class="mb-4">{{ $askeb->diagnosis ?? '-' }}</p>
+
+                    <p><strong>Masalah Potensial:</strong></p>
+                    <p class="mb-4">{{ $askeb->masalah_potensial ?? '-' }}</p>
+
+                    <p><strong>Kebutuhan Segera:</strong></p>
+                    <p class="mb-6">{{ $askeb->kebutuhan_segera ?? '-' }}</p>
+
+                    {{-- PENATALAKSANAAN --}}
+                    <h3 class="text-lg font-bold text-purple-700 mb-4">
+                        D. Penatalaksanaan
+                    </h3>
+
+                    <p><strong>Jam:</strong> {{ $askeb->jam_penatalaksanaan ?? '-' }}</p>
+                    <p>1. {{ $askeb->penatalaksanaan1 ?? '-' }}</p>
+                    <p>2. {{ $askeb->penatalaksanaan2 ?? '-' }}</p>
+                    <p>3. {{ $askeb->penatalaksanaandst ?? '-' }}</p>
+
+                    <hr class="my-6">
+
+                    {{-- Tombol ACC --}}
+                    @if($askeb->status != 'acc')
+                    <form action="{{ route('dosen.askeb.acc', $askeb->id) }}" method="POST">
+                        @csrf
+                        <button type="submit"
+                            class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded mb-4">
+                            ACC Sekarang
+                        </button>
+                    </form>
+                    @else
+                    <div class="bg-green-100 p-3 rounded mb-4">
+                        ASKEB sudah di ACC
+                    </div>
+                    @endif
+
+                    @if($askeb->revisis->isNotEmpty())
+
+                    <hr class="my-6">
+
+                    <h3 class="font-semibold text-purple-700 mb-4">
+                        Riwayat Revisi
+                    </h3>
+
+                    @foreach($askeb->revisis->sortByDesc('created_at') as $revisi)
+                    <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded mb-3">
+                        <p class="text-sm text-gray-600">
+                            {{ $revisi->created_at->format('d-m-Y H:i') }}
+                        </p>
+
+                        <p class="text-gray-800 mt-2">
+                            {{ $revisi->komentar }}
                         </p>
                     </div>
+                    @endforeach
 
-                    <div>
-                        <span class="font-medium">Tradisi :</span>
-                        <p>{{ $askeb->Tradisi ?? '-' }}</p>
-                    </div>
+                    @endif
+                    {{-- Form Revisi --}}
+                    @if($askeb->status != 'acc')
+                    <h3 class="font-semibold text-red-600 mb-2">Kirim Revisi</h3>
 
-                    <div>
-                        <span class="font-medium">Spiritual :</span>
-                        <p>{{ $askeb->Spiritual ?? '-' }}</p>
-                    </div>
+                    <form action="{{ route('dosen.askeb.revisi', $askeb->id) }}" method="POST">
+                        @csrf
 
-                    <div>
-                        <span class="font-medium">Pengetahuan :</span>
-                        <p>{{ $askeb->Pengetahuan ?? '-' }}</p>
-                    </div>
+                        <textarea name="komentar"
+                            class="w-full border rounded p-3"
+                            rows="4"
+                            placeholder="Tulis komentar revisi..."></textarea>
 
-                </div>
-
-                <hr class="my-6">
-
-                {{-- ================= DATA OBYEKTIF ================= --}}
-                <h3 class="text-lg font-bold text-purple-700 mb-4">
-                    B. Data Obyektif
-                </h3>
-
-                {{-- ================= PEMERIKSAAN UMUM ================= --}}
-                <h4 class="font-semibold mb-3">1. Pemeriksaan Umum</h4>
-
-                <div class="grid grid-cols-2 gap-4 mb-6 text-sm">
-
-                    <div>
-                        <span class="font-medium">Kesadaran :</span>
-                        <p>{{ $askeb->kesadaran ?? '-' }}</p>
-                    </div>
-
-                    <div>
-                        <span class="font-medium">Tekanan Darah :</span>
-                        <p>{{ $askeb->tekanan_darah ?? '-' }}</p>
-                    </div>
-
-                    <div>
-                        <span class="font-medium">Denyut Nadi :</span>
-                        <p>{{ $askeb->denyut_nadi ?? '-' }}</p>
-                    </div>
-
-                    <div>
-                        <span class="font-medium">Pernafasan :</span>
-                        <p>{{ $askeb->pernafasan ?? '-' }}</p>
-                    </div>
-
-                    <div>
-                        <span class="font-medium">Suhu :</span>
-                        <p>{{ $askeb->suhu ?? '-' }}</p>
-                    </div>
-
-                    <div>
-                        <span class="font-medium">LILA :</span>
-                        <p>{{ $askeb->lila ?? '-' }}</p>
-                    </div>
-
-                    <div>
-                        <span class="font-medium">Berat/Tinggi Badan :</span>
-                        <p>{{ $askeb->berat_tinggi_badan ?? '-' }}</p>
-                    </div>
-
-                    <div>
-                        <span class="font-medium">Berat Sebelum Hamil :</span>
-                        <p>{{ $askeb->berat_sebelum_hamil ?? '-' }}</p>
-                    </div>
-
-                </div>
-
-                <hr class="my-6">
-
-                <h4 class="font-semibold mb-3">2. Pemeriksaan Fisik</h4>
-
-                <div class="space-y-4 text-sm">
-
-                    <div><span class="font-medium">A. Kepala :</span> {{ $askeb->kepala ?? '-' }}</div>
-                    <div><span class="font-medium">B. Muka :</span> {{ $askeb->muka ?? '-' }}</div>
-                    <div><span class="font-medium">C. Mata :</span> {{ $askeb->mata ?? '-' }}</div>
-                    <div><span class="font-medium">D. Hidung :</span> {{ $askeb->hidung ?? '-' }}</div>
-                    <div><span class="font-medium">E. Mulut :</span> {{ $askeb->mulut ?? '-' }}</div>
-                    <div><span class="font-medium">F. Leher :</span> {{ $askeb->leher ?? '-' }}</div>
-                    <div><span class="font-medium">G. Dada :</span> {{ $askeb->dada ?? '-' }}</div>
-
-                    <div>
-                        <span class="font-medium">H. Abdomen :</span>
-                        <p>{{ $askeb->abdomen ?? '-' }}</p>
-                    </div>
-
-                </div>
-
-                <div class="grid grid-cols-3 gap-4 mt-4 mb-6 text-sm">
-
-                    <div><span class="font-medium">Leopold I :</span> {{ $askeb->leopold_i ?? '-' }}</div>
-                    <div><span class="font-medium">Leopold II :</span> {{ $askeb->leopold_ii ?? '-' }}</div>
-                    <div><span class="font-medium">Leopold III :</span> {{ $askeb->leopold_iii ?? '-' }}</div>
-                    <div><span class="font-medium">Leopold IV :</span> {{ $askeb->leopold_iv ?? '-' }}</div>
-                    <div><span class="font-medium">TBJ :</span> {{ $askeb->tbj ?? '-' }}</div>
-                    <div><span class="font-medium">DJJ :</span> {{ $askeb->djj ?? '-' }}</div>
-
-                </div>
-
-                <div class="space-y-4 text-sm">
-
-                    <div><span class="font-medium">I. Genetalia :</span> {{ $askeb->genetalia ?? '-' }}</div>
-                    <div><span class="font-medium">J. Anus :</span> {{ $askeb->anus ?? '-' }}</div>
-                    <div><span class="font-medium">K. Ekstremitas :</span> {{ $askeb->ekstemitas ?? '-' }}</div>
-
-                </div>
-
-                <hr class="my-6">
-
-                <h4 class="font-semibold mb-3">3. Pemeriksaan Panggul Luar</h4>
-
-                <div class="grid grid-cols-2 gap-4 mb-6 text-sm">
-
-                    <div>
-                        <span class="font-medium">Distansia Spinarum :</span>
-                        <p>{{ $askeb->distansia_sinarum ?? '-' }}</p>
-                    </div>
-
-                    <div>
-                        <span class="font-medium">Distansia Kristarum :</span>
-                        <p>{{ $askeb->distansia_kristarum ?? '-' }}</p>
-                    </div>
-
-                    <div>
-                        <span class="font-medium">Konjugata Eksterna :</span>
-                        <p>{{ $askeb->konjugata_eksterna ?? '-' }}</p>
-                    </div>
-
-                    <div>
-                        <span class="font-medium">Lingkar Panggul :</span>
-                        <p>{{ $askeb->lingkar_panggul ?? '-' }}</p>
-                    </div>
-
-                </div>
-
-                <hr class="my-6">
-
-
-
-                {{-- DIAGNOSIS --}}
-                <h3 class="text-lg font-bold text-purple-700 mb-4">
-                    C. Analisis Data
-                </h3>
-
-                <p><strong>Diagnosis:</strong></p>
-                <p class="mb-4">{{ $askeb->diagnosis ?? '-' }}</p>
-
-                <p><strong>Masalah Potensial:</strong></p>
-                <p class="mb-4">{{ $askeb->masalah_potensial ?? '-' }}</p>
-
-                <p><strong>Kebutuhan Segera:</strong></p>
-                <p class="mb-6">{{ $askeb->kebutuhan_segera ?? '-' }}</p>
-
-                {{-- PENATALAKSANAAN --}}
-                <h3 class="text-lg font-bold text-purple-700 mb-4">
-                    D. Penatalaksanaan
-                </h3>
-
-                <p><strong>Jam:</strong> {{ $askeb->jam_penatalaksanaan ?? '-' }}</p>
-                <p>1. {{ $askeb->penatalaksanaan1 ?? '-' }}</p>
-                <p>2. {{ $askeb->penatalaksanaan2 ?? '-' }}</p>
-                <p>3. {{ $askeb->penatalaksanaandst ?? '-' }}</p>
-                
-                <hr class="my-6">
-
-                {{-- Tombol ACC --}}
-                @if($askeb->status != 'acc')
-                <form action="{{ route('dosen.askeb.acc', $askeb->id) }}" method="POST">
-                    @csrf
-                    <button type="submit"
-                        class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded mb-4">
-                        ACC Sekarang
-                    </button>
-                </form>
-                @else
-                <div class="bg-green-100 p-3 rounded mb-4">
-                    ASKEB sudah di ACC
-                </div>
-                @endif
-
-                @if($askeb->revisis->isNotEmpty())
-
-                <hr class="my-6">
-
-                <h3 class="font-semibold text-purple-700 mb-4">
-                    Riwayat Revisi
-                </h3>
-
-                @foreach($askeb->revisis->sortByDesc('created_at') as $revisi)
-                <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded mb-3">
-                    <p class="text-sm text-gray-600">
-                        {{ $revisi->created_at->format('d-m-Y H:i') }}
-                    </p>
-
-                    <p class="text-gray-800 mt-2">
-                        {{ $revisi->komentar }}
-                    </p>
-                </div>
-                @endforeach
-
-                @endif
-                {{-- Form Revisi --}}
-                @if($askeb->status != 'acc')
-                <h3 class="font-semibold text-red-600 mb-2">Kirim Revisi</h3>
-
-                <form action="{{ route('dosen.askeb.revisi', $askeb->id) }}" method="POST">
-                    @csrf
-
-                    <textarea name="komentar"
-                        class="w-full border rounded p-3"
-                        rows="4"
-                        placeholder="Tulis komentar revisi..."></textarea>
-
-                    <button type="submit"
-                        class="mt-3 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded">
-                        Kirim Revisi
-                    </button>
-                </form>
-                @endif
+                        <button type="submit"
+                            class="mt-3 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded">
+                            Kirim Revisi
+                        </button>
+                    </form>
+                    @endif
 
             </div>
 

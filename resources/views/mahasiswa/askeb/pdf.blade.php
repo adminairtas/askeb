@@ -2,192 +2,169 @@
 <html>
 <head>
 <meta charset="utf-8">
+<title>Laporan ANC</title>
 
 <style>
 
-@page{
-    size:A4;
-    margin:2cm;
+@page {
+    size: A4;
+    margin: 2.5cm;
 }
 
 body{
-    font-family:"Times New Roman", serif;
-    font-size:12px;
-    line-height:1.5;
+    font-family: "Times New Roman", serif;
+    font-size: 12px;
+    line-height: 1.6;
 }
 
-.title{
-    text-align:right;
+.judul{
+    text-align:center;
     font-weight:bold;
 }
 
 .section{
-    margin-top:10px;
     font-weight:bold;
+    margin-top:20px;
+}
+
+.label{
+    display:inline-block;
+    width:170px;
 }
 
 table{
     width:100%;
-}
-
-td{
-    padding:2px;
-    vertical-align:top;
-}
-
-.table-border{
     border-collapse:collapse;
+    font-size:11px;
 }
 
-.table-border td,
-.table-border th{
+table th, table td{
     border:1px solid black;
     padding:4px;
+    text-align:center;
+}
+
+.text-left{
+    text-align:left;
+}
+
+.mt-10{
+    margin-top:10px;
+}
+
+.mt-20{
+    margin-top:20px;
 }
 
 </style>
+
 </head>
 
 <body>
 
-{{-- ===================== --}}
-{{-- HALAMAN 1 --}}
-{{-- ===================== --}}
+<p><b>LAPORAN ANC : No …….</b></p>
 
-<div class="title">
-LAPORAN ANC : No {{ $askeb->id }}
-</div>
-
-<br>
-
-<b>Asuhan Kebidanan Pada :</b> {{ $askeb->nama_pasien }}
-
-<br><br>
-
-<table>
-<tr>
-<td width="25%">Tanggal pengkajian</td>
-<td>: {{ $askeb->tanggal_pengkajian }}</td>
-
-<td width="10%">Pukul</td>
-<td>: {{ $askeb->pukul }} WIB</td>
-</tr>
-
-<tr>
-<td>Tempat</td>
-<td>: {{ $askeb->tempat }}</td>
-
-<td>Oleh</td>
-<td>: {{ $askeb->mahasiswa->name }}</td>
-</tr>
-</table>
-
-<div class="section">A. DATA SUBYEKTIF</div>
-
-<b>1. Biodata / Identitas</b>
-
-<table>
-
-<tr>
-<td width="20%">Nama Ibu</td>
-<td>: {{ $askeb->nama_ibu }}</td>
-
-<td width="20%">Nama Suami</td>
-<td>: {{ $askeb->nama_suami }}</td>
-</tr>
-
-<tr>
-<td>Umur</td>
-<td>: {{ $askeb->umur_ibu }}</td>
-
-<td>Umur</td>
-<td>: {{ $askeb->umur_suami }}</td>
-</tr>
-
-<tr>
-<td>Suku/Bangsa</td>
-<td>: {{ $askeb->suku_ibu }}</td>
-
-<td>Suku/Bangsa</td>
-<td>: {{ $askeb->suku_suami }}</td>
-</tr>
-
-<tr>
-<td>Agama</td>
-<td>: {{ $askeb->agama_ibu }}</td>
-
-<td>Agama</td>
-<td>: {{ $askeb->agama_suami }}</td>
-</tr>
-
-<tr>
-<td>Pendidikan</td>
-<td>: {{ $askeb->pendidikan_ibu }}</td>
-
-<td>Pendidikan</td>
-<td>: {{ $askeb->pendidikan_suami }}</td>
-</tr>
-
-<tr>
-<td>Pekerjaan</td>
-<td>: {{ $askeb->pekerjaan_ibu }}</td>
-
-<td>Pekerjaan</td>
-<td>: {{ $askeb->pekerjaan_suami }}</td>
-</tr>
-
-<tr>
-<td>Alamat</td>
-<td colspan="3">: {{ $askeb->alamat }}</td>
-</tr>
-
-</table>
+<p>
+<b>Asuhan Kebidanan Pada :</b><br>
+{{ $askeb->asuhan_pada ?? '-' }}
+</p>
 
 <br>
 
-<b>Keluhan Utama</b><br>
-{{ $askeb->keluhan }}
+<p>
+<span class="label">Tanggal pengkajian</span> :
+{{ $askeb->tanggal_pengkajian ?? '-' }}
 
-<br><br>
+&nbsp;&nbsp;&nbsp;
 
-<b>Riwayat Menstruasi</b>
+<span class="label">Pukul</span> :
+{{ $askeb->pukul ?? '-' }} WIB
+</p>
 
-<table>
+<p>
+<span class="label">Tempat</span> :
+{{ $askeb->tempat ?? '-' }}
+
+&nbsp;&nbsp;&nbsp;
+
+<span class="label">Oleh</span> :
+{{ $askeb->mahasiswa->name ?? '-' }}
+</p>
+
+
+<div class="section">A. Data Subyektif</div>
+
+<p><b>Biodata / Identitas</b></p>
+
+<table style="border:none;">
 <tr>
-<td width="25%">Menarche</td>
-<td>: {{ $askeb->menarche }} tahun</td>
-</tr>
+<td class="text-left" style="border:none;">
+Nama Ibu : {{ $askeb->nama_ibu ?? '-' }} <br>
+Umur : {{ $askeb->umur_ibu ?? '-' }} <br>
+Suku/Bangsa : {{ $askeb->suku_ibu ?? '-' }} <br>
+Agama : {{ $askeb->agama_ibu ?? '-' }} <br>
+Pendidikan : {{ $askeb->pendidikan_ibu ?? '-' }} <br>
+Pekerjaan : {{ $askeb->pekerjaan_ibu ?? '-' }} <br>
+Penghasilan : {{ $askeb->penghasilan_ibu ?? '-' }}
+</td>
 
-<tr>
-<td>Siklus haid</td>
-<td>: {{ $askeb->siklus }}</td>
-</tr>
-
-<tr>
-<td>Lama</td>
-<td>: {{ $askeb->lama_haid }} hari</td>
-</tr>
-
-<tr>
-<td>Jumlah</td>
-<td>: {{ $askeb->jumlah_haid }} cc</td>
+<td class="text-left" style="border:none;">
+Nama Suami : {{ $askeb->nama_suami ?? '-' }} <br>
+Umur : {{ $askeb->umur_suami ?? '-' }} <br>
+Suku/Bangsa : {{ $askeb->suku_suami ?? '-' }} <br>
+Agama : {{ $askeb->agama_suami ?? '-' }} <br>
+Pendidikan : {{ $askeb->pendidikan_suami ?? '-' }} <br>
+Pekerjaan : {{ $askeb->pekerjaan_suami ?? '-' }} <br>
+Penghasilan : {{ $askeb->penghasilan_suami ?? '-' }}
+</td>
 </tr>
 </table>
 
-<br>
+<p class="mt-10">
+Alamat : {{ $askeb->alamat ?? '-' }}
+</p>
 
-<b>Riwayat Perkawinan</b><br>
+<p>
+Keluhan Utama : {{ $askeb->keluhan_utama ?? '-' }}
+</p>
 
-Usia pertama menikah : {{ $askeb->usia_pertama_menikah }} tahun<br>
-Lama menikah : {{ $askeb->lama_menikah }} tahun<br>
-Status pernikahan : {{ $askeb->status_pernikahan }}
 
-<br><br>
+<p class="section">Riwayat Menstruasi</p>
 
-<b>Riwayat Obstetri</b>
+<p>
+Menarche : {{ $askeb->menarche ?? '-' }} th
+</p>
 
-<table class="table-border">
+<p>
+Siklus haid : {{ $askeb->siklus_haid ?? '-' }}
+</p>
 
+<p>
+Lama : {{ $askeb->lama_haid ?? '-' }} hari
+</p>
+
+<p>
+Jumlah : {{ $askeb->jumlah_haid ?? '-' }} cc
+</p>
+
+<p>
+Karakteristik : {{ $askeb->karakteristik_haid ?? '-' }}
+</p>
+
+
+<p class="section">Riwayat Perkawinan</p>
+
+<p>
+Usia pertama menikah {{ $askeb->usia_pertama_menikah ?? '-' }} th,
+lama menikah {{ $askeb->lama_menikah ?? '-' }} th,
+status pernikahan {{ $askeb->status_pernikahan ?? '-' }}
+</p>
+
+
+<p class="section">Riwayat Obstetri</p>
+
+<table>
+<thead>
 <tr>
 <th>No</th>
 <th>Kehamilan</th>
@@ -197,230 +174,138 @@ Status pernikahan : {{ $askeb->status_pernikahan }}
 <th>JK</th>
 <th>BB/PB</th>
 <th>Umur</th>
-<th>Keterangan</th>
+<th>Ket</th>
 <th>Laktasi</th>
 <th>Penyulit</th>
 </tr>
+</thead>
 
-@foreach($askeb->obstetris as $o)
+<tbody>
+
+@foreach($askeb->obstetris as $i => $ob)
+
 <tr>
-<td>{{ $loop->iteration }}</td>
-<td>{{ $o->kehamilan }}</td>
-<td>{{ $o->jenis }}</td>
-<td>{{ $o->penolong }}</td>
-<td>{{ $o->tempat }}</td>
-<td>{{ $o->jk }}</td>
-<td>{{ $o->bb_pb }}</td>
-<td>{{ $o->umur }}</td>
-<td>{{ $o->ket }}</td>
-<td>{{ $o->laktasi }}</td>
-<td>{{ $o->penyulit }}</td>
+<td>{{ $i+1 }}</td>
+<td>{{ $ob->kehamilan ?? '-' }}</td>
+<td>{{ $ob->jenis_persalinan ?? '-' }}</td>
+<td>{{ $ob->penolong ?? '-' }}</td>
+<td>{{ $ob->tempat_persalinan ?? '-' }}</td>
+<td>{{ $ob->jk_bayi ?? '-' }}</td>
+<td>{{ $ob->bb_pb ?? '-' }}</td>
+<td>{{ $ob->umur_bayi ?? '-' }}</td>
+<td>{{ $ob->keterangan_bayi ?? '-' }}</td>
+<td>{{ $ob->laktasi ?? '-' }}</td>
+<td>{{ $ob->penyulit_nifas ?? '-' }}</td>
 </tr>
+
 @endforeach
 
+</tbody>
 </table>
 
 
-<div style="page-break-before: always;"></div>
+<p class="section">Riwayat Kontrasepsi</p>
+
+<p>
+Sebelum hamil ibu {{ $askeb->sebelum_hamil_ibu ?? '-' }}
+</p>
 
 
-{{-- ===================== --}}
-{{-- HALAMAN 2 --}}
-{{-- ===================== --}}
+<p class="section">Riwayat Kehamilan Sekarang</p>
 
-<div class="section">B. DATA OBYEKTIF</div>
+<p>
+HPHT :
+{{ $askeb->hpht 
+? \Carbon\Carbon::parse($askeb->hpht)->translatedFormat('d F Y')
+: '-' }}
 
-<b>Pemeriksaan Umum</b>
+&nbsp;&nbsp;&nbsp;&nbsp;
 
-<table>
+HPL :
+{{ $askeb->hpl 
+? \Carbon\Carbon::parse($askeb->hpl)->translatedFormat('d F Y')
+: '-' }}
+</p>
 
-<tr>
-<td width="25%">Kesadaran</td>
-<td>: {{ $askeb->kesadaran }}</td>
-</tr>
-
-<tr>
-<td>Tekanan darah</td>
-<td>: {{ $askeb->tekanan_darah }}</td>
-</tr>
-
-<tr>
-<td>Nadi</td>
-<td>: {{ $askeb->nadi }}</td>
-</tr>
-
-<tr>
-<td>Suhu</td>
-<td>: {{ $askeb->suhu }}</td>
-</tr>
-
-<tr>
-<td>Pernafasan</td>
-<td>: {{ $askeb->pernafasan }}</td>
-</tr>
-
-<tr>
-<td>LILA</td>
-<td>: {{ $askeb->lila }}</td>
-</tr>
-
-<tr>
-<td>BB / TB</td>
-<td>: {{ $askeb->bb_tb }}</td>
-</tr>
-
-</table>
-
-<br>
-
-<b>Pemeriksaan Fisik</b>
-
-<table>
-
-<tr>
-<td width="25%">Kepala</td>
-<td>: {{ $askeb->kepala }}</td>
-</tr>
-
-<tr>
-<td>Muka</td>
-<td>: {{ $askeb->muka }}</td>
-</tr>
-
-<tr>
-<td>Mata</td>
-<td>: {{ $askeb->mata }}</td>
-</tr>
-
-<tr>
-<td>Hidung</td>
-<td>: {{ $askeb->hidung }}</td>
-</tr>
-
-<tr>
-<td>Mulut</td>
-<td>: {{ $askeb->mulut }}</td>
-</tr>
-
-<tr>
-<td>Leher</td>
-<td>: {{ $askeb->leher }}</td>
-</tr>
-
-<tr>
-<td>Dada</td>
-<td>: {{ $askeb->dada }}</td>
-</tr>
-
-<tr>
-<td>Abdomen</td>
-<td>: {{ $askeb->abdomen }}</td>
-</tr>
-
-</table>
+<p>
+Selama hamil ibu memeriksakan kehamilan {{ $askeb->jumlah_periksa ?? '-' }} kali,
+status imunisasi {{ $askeb->status_imunisasi_tt ?? '-' }},
+jumlah tablet MMS {{ $askeb->jumlah_mms ?? '-' }} butir,
+gerak janin usia {{ $askeb->gerak_janin_usia ?? '-' }},
+keluhan {{ $askeb->keluhan_hamil ?? '-' }},
+obat yang didapat {{ $askeb->obat_didapat ?? '-' }}.
+</p>
 
 
-<div style="page-break-before: always;"></div>
+<p class="section">Riwayat Kesehatan Ibu</p>
+
+<p>{{ $askeb->riwayat_kesehatan_ibu ?? '-' }}</p>
 
 
-{{-- ===================== --}}
-{{-- HALAMAN 3 --}}
-{{-- ===================== --}}
+<p class="section">Riwayat Kesehatan Keluarga</p>
 
-<b>Pemeriksaan Leopold</b>
-
-<table>
-
-<tr>
-<td width="25%">Leopold I</td>
-<td>: {{ $askeb->leopold1 }}</td>
-</tr>
-
-<tr>
-<td>Leopold II</td>
-<td>: {{ $askeb->leopold2 }}</td>
-</tr>
-
-<tr>
-<td>Leopold III</td>
-<td>: {{ $askeb->leopold3 }}</td>
-</tr>
-
-<tr>
-<td>Leopold IV</td>
-<td>: {{ $askeb->leopold4 }}</td>
-</tr>
-
-<tr>
-<td>TBJ</td>
-<td>: {{ $askeb->tbj }}</td>
-</tr>
-
-<tr>
-<td>DJJ</td>
-<td>: {{ $askeb->djj }}</td>
-</tr>
-
-</table>
-
-<br>
-
-<b>Pemeriksaan Laboratorium</b>
-
-Tanggal : {{ $askeb->tanggal_lab }}<br>
-Tempat : {{ $askeb->tempat_lab }}<br>
-Hasil : {{ $askeb->hasil_lab }}
+<p>{{ $askeb->riwayat_kesehatan_keluarga ?? '-' }}</p>
 
 
-<div style="page-break-before: always;"></div>
+<div class="section">B. Data Obyektif</div>
+
+<p>
+Kesadaran : {{ $askeb->kesadaran ?? '-' }} <br>
+Tekanan darah : {{ $askeb->tekanan_darah ?? '-' }} <br>
+Denyut nadi : {{ $askeb->denyut_nadi ?? '-' }} <br>
+Pernafasan : {{ $askeb->pernafasan ?? '-' }} <br>
+Suhu : {{ $askeb->suhu ?? '-' }} <br>
+LILA : {{ $askeb->lila ?? '-' }} <br>
+BB/TB : {{ $askeb->berat_tinggi_badan ?? '-' }} <br>
+BB sebelum hamil : {{ $askeb->berat_sebelum_hamil ?? '-' }}
+</p>
 
 
-{{-- ===================== --}}
-{{-- HALAMAN 4 --}}
-{{-- ===================== --}}
+<div class="section">C. Analisis Data</div>
 
-<div class="section">C. ANALISIS DATA</div>
+<p>
+Diagnosis : {{ $askeb->diagnosis ?? '-' }}
+</p>
 
-Diagnosis : {{ $askeb->diagnosis }}
+<p>
+Masalah Potensial : {{ $askeb->masalah_potensial ?? '-' }}
+</p>
 
-<br><br>
+<p>
+Kebutuhan Segera : {{ $askeb->kebutuhan_segera ?? '-' }}
+</p>
 
-Masalah Potensial : {{ $askeb->masalah_potensial }}
 
-<br><br>
+<div class="section">D. Penatalaksanaan</div>
 
-Kebutuhan Segera : {{ $askeb->kebutuhan_segera }}
+<p>
+Jam : {{ $askeb->jam_penatalaksanaan ?? '-' }}
+</p>
 
-<br><br>
+<p>1. {{ $askeb->penatalaksanaan1 ?? '-' }}</p>
+<p>2. {{ $askeb->penatalaksanaan2 ?? '-' }}</p>
+<p>3. {{ $askeb->penatalaksanaandst ?? '-' }}</p>
 
-<div class="section">D. PENATALAKSANAAN</div>
-
-Jam : {{ $askeb->jam_penatalaksanaan }}
-
-<br>
-
-{{ $askeb->penatalaksanaan }}
 
 <br><br><br>
 
-<table>
-<tr>
-<td width="60%"></td>
-<td align="center">
+<div style="width:100%;">
 
-Bojonegoro, {{ date('d-m-Y') }}
+<div style="width:50%; float:right; text-align:center">
 
-<br><br>
+<p>Bojonegoro, .....................</p>
 
-Pembimbing Institusi
+<p>Telah diperiksa dan disetujui</p>
 
-<br><br><br><br>
+<p>Pembimbing Institusi</p>
 
-({{ $askeb->dosen->name }})
+<br><br><br>
 
-</td>
-</tr>
-</table>
+<p>( __________________ )</p>
+
+</div>
+
+</div>
 
 </body>
 </html>

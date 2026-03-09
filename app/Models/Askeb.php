@@ -60,7 +60,11 @@ class Askeb extends Model
         'hpht',
         'hpl',
         'jumlah_periksa',
+        'status_imunisasi_tt',
+        'jumlah_mms',
+        'gerak_janin_usia',
         'keluhan_hamil',
+        'obat_didapat',
 
         // KESEHATAN
         'riwayat_kesehatan_ibu',
