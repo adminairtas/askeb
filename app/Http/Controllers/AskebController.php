@@ -17,12 +17,35 @@ class AskebController extends Controller
 {
     public function index()
     {
+        $mahasiswaId = auth()->id();
+
         $askebs = Askeb::with('dosen')
-            ->where('mahasiswa_id', auth()->id())
+            ->where('mahasiswa_id', $mahasiswaId)
             ->latest()
             ->get();
 
-        return view('mahasiswa.askeb.index', compact('askebs'));
+        // Statistik
+        $total = Askeb::where('mahasiswa_id', $mahasiswaId)->count();
+
+        $review = Askeb::where('mahasiswa_id', $mahasiswaId)
+            ->where('status', 'review')
+            ->count();
+
+        $revisi = Askeb::where('mahasiswa_id', $mahasiswaId)
+            ->where('status', 'revisi')
+            ->count();
+
+        $acc = Askeb::where('mahasiswa_id', $mahasiswaId)
+            ->where('status', 'acc')
+            ->count();
+
+        return view('mahasiswa.askeb.index', compact(
+            'askebs',
+            'total',
+            'review',
+            'revisi',
+            'acc'
+        ));
     }
 
     public function create()
@@ -105,7 +128,7 @@ class AskebController extends Controller
         return view('mahasiswa.askeb.show', compact('askeb'));
     }
 
-    
+
 
     public function edit($id)
     {
@@ -143,11 +166,10 @@ class AskebController extends Controller
                         'tindakan' => $value
                     ]);
                 }
-                
             }
         }
 
-        
+
 
         // 2️⃣ Hapus riwayat obstetri lama
         $askeb->obstetris()->delete();
@@ -177,8 +199,8 @@ class AskebController extends Controller
         }
 
 
-        
-        
+
+
         // 4️⃣ Ubah status kembali ke review
         $askeb->update([
             'status' => 'review'

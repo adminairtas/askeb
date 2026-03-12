@@ -86,24 +86,24 @@
 
             @endif
 
-@if($askeb->status == 'acc')
+            @if($askeb->status == 'acc')
 
-<div class="mt-6 flex gap-3">
+            <div class="mt-6 flex gap-3">
 
-<a href="{{ route('mahasiswa.askeb.pdf', $askeb->id) }}"
-class="bg-green-600 text-white px-4 py-2 rounded-lg shadow">
-📄 Download PDF
-</a>
+                <a href="{{ route('mahasiswa.askeb.pdf', $askeb->id) }}"
+                    class="bg-green-600 text-white px-4 py-2 rounded-lg shadow">
+                    📄 Download PDF
+                </a>
 
-<a href="{{ route('askeb.print', $askeb->id) }}" 
-   target="_blank"
-   class="bg-green-600 text-white px-4 py-2 rounded">
-🖨 Print PDF
-</a>
+                <a href="{{ route('askeb.print', $askeb->id) }}"
+                    target="_blank"
+                    class="bg-green-600 text-white px-4 py-2 rounded">
+                    🖨 Print PDF
+                </a>
 
-</div>
+            </div>
 
-@endif
+            @endif
 
         </div>
 
@@ -468,49 +468,49 @@ class="bg-green-600 text-white px-4 py-2 rounded-lg shadow">
             {{-- ================= PEMERIKSAAN UMUM ================= --}}
             <h4 class="font-semibold mb-3">1. Pemeriksaan Umum</h4>
 
-<div class="grid md:grid-cols-2 gap-4">
+            <div class="grid md:grid-cols-2 gap-4">
 
-    <div class="flex justify-between border-b py-1">
-        <span>Kesadaran</span>
-        <span>{{ $askeb->kesadaran ?? '-' }}</span>
-    </div>
+                <div class="flex justify-between border-b py-1">
+                    <span>Kesadaran</span>
+                    <span>{{ $askeb->kesadaran ?? '-' }}</span>
+                </div>
 
-    <div class="flex justify-between border-b py-1">
-        <span>Tekanan Darah</span>
-        <span>{{ $askeb->tekanan_darah ?? '-' }} mmHg</span>
-    </div>
+                <div class="flex justify-between border-b py-1">
+                    <span>Tekanan Darah</span>
+                    <span>{{ $askeb->tekanan_darah ?? '-' }} mmHg</span>
+                </div>
 
-    <div class="flex justify-between border-b py-1">
-        <span>Denyut Nadi</span>
-        <span>{{ $askeb->denyut_nadi ?? '-' }} x/menit</span>
-    </div>
+                <div class="flex justify-between border-b py-1">
+                    <span>Denyut Nadi</span>
+                    <span>{{ $askeb->denyut_nadi ?? '-' }} x/menit</span>
+                </div>
 
-    <div class="flex justify-between border-b py-1">
-        <span>Pernafasan</span>
-        <span>{{ $askeb->pernafasan ?? '-' }} x/menit</span>
-    </div>
+                <div class="flex justify-between border-b py-1">
+                    <span>Pernafasan</span>
+                    <span>{{ $askeb->pernafasan ?? '-' }} x/menit</span>
+                </div>
 
-    <div class="flex justify-between border-b py-1">
-        <span>Suhu Tubuh</span>
-        <span>{{ $askeb->suhu ?? '-' }} °C</span>
-    </div>
+                <div class="flex justify-between border-b py-1">
+                    <span>Suhu Tubuh</span>
+                    <span>{{ $askeb->suhu ?? '-' }} °C</span>
+                </div>
 
-    <div class="flex justify-between border-b py-1">
-        <span>LILA</span>
-        <span>{{ $askeb->lila ?? '-' }} cm</span>
-    </div>
+                <div class="flex justify-between border-b py-1">
+                    <span>LILA</span>
+                    <span>{{ $askeb->lila ?? '-' }} cm</span>
+                </div>
 
-    <div class="flex justify-between border-b py-1">
-        <span>Berat/Tinggi Badan</span>
-        <span>{{ $askeb->berat_tinggi_badan ?? '-' }} kg/cm</span>
-    </div>
+                <div class="flex justify-between border-b py-1">
+                    <span>Berat/Tinggi Badan</span>
+                    <span>{{ $askeb->berat_tinggi_badan ?? '-' }} kg/cm</span>
+                </div>
 
-    <div class="flex justify-between border-b py-1">
-        <span>Berat Sebelum Hamil</span>
-        <span>{{ $askeb->berat_sebelum_hamil ?? '-' }} kg</span>
-    </div>
+                <div class="flex justify-between border-b py-1">
+                    <span>Berat Sebelum Hamil</span>
+                    <span>{{ $askeb->berat_sebelum_hamil ?? '-' }} kg</span>
+                </div>
 
-</div>
+            </div>
 
             <hr class="my-6">
 
@@ -617,43 +617,43 @@ class="bg-green-600 text-white px-4 py-2 rounded-lg shadow">
             <p><strong>Kebutuhan Segera:</strong></p>
             <p class="mb-6">{{ $askeb->kebutuhan_segera ?? '-' }}</p>
 
-<h3 class="text-lg font-bold text-purple-700 mb-4">
-    D. Penatalaksanaan
-</h3>
+            <h3 class="text-lg font-bold text-purple-700 mb-4">
+                D. Penatalaksanaan
+            </h3>
 
-<div class="mb-4">
+            <div class="mb-4">
 
-    <p>
-        <span class="font-semibold">Jam :</span>
-        {{ $askeb->penatalaksanaans->first()->jam ?? '-' }}
-    </p>
+                <p>
+                    <span class="font-semibold">Jam :</span>
+                    {{ $askeb->penatalaksanaans->first()->jam ?? '-' }}
+                </p>
 
-    <p>
-        <span class="font-semibold">Tanggal :</span>
-        {{ $askeb->penatalaksanaans->first()->tanggal ?? '-' }}
-    </p>
+                <p>
+                    <span class="font-semibold">Tanggal :</span>
+                    {{ $askeb->penatalaksanaans->first()->tanggal ?? '-' }}
+                </p>
 
-</div>
+            </div>
 
-@if($askeb->penatalaksanaans->count())
+            @if($askeb->penatalaksanaans->count())
 
-<ol class="list-decimal ml-6 space-y-1">
+            <ol class="list-decimal ml-6 space-y-1">
 
-@foreach($askeb->penatalaksanaans as $item)
+                @foreach($askeb->penatalaksanaans as $item)
 
-<li>
-    {{ $item->tindakan }}
-</li>
+                <li>
+                    {{ $item->tindakan }}
+                </li>
 
-@endforeach
+                @endforeach
 
-</ol>
+            </ol>
 
-@else
+            @else
 
-<p class="text-gray-500">Belum ada penatalaksanaan.</p>
+            <p class="text-gray-500">Belum ada penatalaksanaan.</p>
 
-@endif
+            @endif
 
         </div>
 

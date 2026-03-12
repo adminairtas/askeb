@@ -43,7 +43,7 @@
         </div>
 
         <!-- TABEL ASKEB -->
-        <div class="bg-white rounded-xl shadow mt-6 overflow-hidden">
+        <div class="bg-white rounded-xl shadow mt-6 overflow-x-auto">
 
             <div class="p-4 bg-purple-100 font-semibold text-purple-700">
                 Daftar ASKEB Masuk
