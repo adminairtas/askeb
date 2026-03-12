@@ -2,6 +2,13 @@
 
     <div class="p-6 max-w-4xl mx-auto bg-white rounded-xl shadow">
 
+
+        {{-- HEADER --}}
+        <div class="bg-purple-700 text-white p-6 rounded-xl mb-6">
+            <h1 class="text-2xl font-bold">ASKEB KEHAMILAN</h1>
+            <p>PRODI KEBIDANAN</p>
+        </div>
+
         {{-- ================= STATUS ASKEB ================= --}}
         <div class="mb-6 p-4 rounded-lg border
     @if($askeb->status == 'review') bg-yellow-50 border-yellow-300
@@ -79,48 +86,35 @@
 
             @endif
 
-            {{-- ================= DOWNLOAD PDF ================= --}}
-            @if($askeb->status == 'acc')
+@if($askeb->status == 'acc')
 
-            <div class="mt-6">
-                <a href="{{ route('mahasiswa.askeb.pdf', $askeb->id) }}"
-                    class="inline-block bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg shadow">
-                    📄 Download PDF
-                </a>
-            </div>
+<div class="mt-6 flex gap-3">
 
-            @endif
+<a href="{{ route('mahasiswa.askeb.pdf', $askeb->id) }}"
+class="bg-green-600 text-white px-4 py-2 rounded-lg shadow">
+📄 Download PDF
+</a>
+
+<a href="{{ route('askeb.print', $askeb->id) }}" 
+   target="_blank"
+   class="bg-green-600 text-white px-4 py-2 rounded">
+🖨 Print PDF
+</a>
+
+</div>
+
+@endif
 
         </div>
 
-        {{-- HEADER --}}
-        <div class="bg-purple-700 text-white p-6 rounded-xl mb-6">
-            <h1 class="text-2xl font-bold">ASKEB KEHAMILAN</h1>
-            <p>PRODI KEBIDANAN</p>
-        </div>
-
+        <hr class="my-6">
         {{-- INFORMASI DOSEN --}}
         <div class="mb-6">
             <p><strong>Dosen Pembimbing:</strong> {{ $askeb->dosen->name ?? '-' }}</p>
             <p><strong>Mahasiswa:</strong> {{ $askeb->mahasiswa->name ?? '-' }}</p>
         </div>
 
-        <hr class="my-6">
 
-        {{-- HEADER DATA --}}
-        <div class="grid grid-cols-2 gap-6 mb-6">
-            <div>
-                <strong>Asuhan Kebidanan Pada:</strong>
-                <p>{{ $askeb->asuhan_pada ?? '-' }}</p>
-            </div>
-            <div>
-                <p><strong>Tanggal:</strong> {{ $askeb->tanggal_pengkajian ?? '-'}}</p>
-                <p><strong>Pukul:</strong> {{ $askeb->pukul ?? '-' }}</p>
-                <p><strong>Tempat:</strong> {{ $askeb->tempat ?? '-' }}</p>
-            </div>
-        </div>
-
-        <hr class="my-6">
 
         {{-- BIODATA --}}
         <h3 class="text-lg font-bold text-purple-700 mb-4">
@@ -158,11 +152,11 @@
             <p>{{ $askeb->alamat ?? '-' }}</p>
         </div>
 
-        <div class="mb-6">
-            <strong>Keluhan Utama:</strong>
-            <p>{{ $askeb->keluhan_utama ?? '-' }}</p>
-        </div>
+        <hr class="my-6">
 
+        {{-- KELUHAN UTAMA --}}
+        <h3 class="font-semibold text-lg mb-3">2. Keluhan Utama</h3>
+        <p>{{ $askeb->keluhan_utama ?? '-' }}</p>
         <hr class="my-6">
 
         <div class="my-6">
@@ -314,7 +308,7 @@
             </div>
 
             <h3 class="font-semibold text-lg mb-3">
-            8. Riwayat Kesehatan Ibu
+                8. Riwayat Kesehatan Ibu
             </h3>
 
             <div class="mb-6 text-sm">
@@ -337,8 +331,88 @@
                 10. Pola Fungsional Kesehatan
             </h3>
 
-            <div class="mb-6 text-sm">
-                {{ $askeb->pola_fungsional_kesehatan ?? '-' }}
+            <div class="space-y-3 text-sm">
+
+                <div>
+                    <b>A. Pola nutrisi :</b>
+                    {{ $askeb->pola_nutrisi ?? '-' }}
+                </div>
+
+
+                <div>
+                    <b>B. Pola eliminasi :</b>
+
+                    <div class="ml-6">
+                        BAK : {{ $askeb->bak_frekuensi ?? '-' }} x/hari,
+                        konsistensi {{ $askeb->bak_konsistensi ?? '-' }}
+                    </div>
+
+                    <div class="ml-6">
+                        BAB : {{ $askeb->bab_frekuensi ?? '-' }} x/hari,
+                        konsistensi {{ $askeb->bab_konsistensi ?? '-' }}
+                    </div>
+
+                </div>
+
+
+                <div>
+                    <b>C. Pola istirahat :</b>
+
+                    <div class="ml-6 grid grid-cols-2">
+                        <div>
+                            Tidur siang : {{ $askeb->tidur_siang ?? '-' }} jam/hari
+                        </div>
+
+                        <div>
+                            Tidur malam : {{ $askeb->tidur_malam ?? '-' }} jam/hari
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div>
+                    <b>D. Pola aktivitas :</b>
+                    {{ $askeb->pola_aktivitas ?? '-' }}
+                </div>
+
+
+                <div>
+                    <b>E. Personal hygiene :</b>
+
+                    <div class="ml-6">
+
+                        Ibu mandi {{ $askeb->mandi ?? '-' }} kali/hari,
+
+                        gosok gigi {{ $askeb->gosok_gigi ?? '-' }} kali/hari,
+
+                        keramas {{ $askeb->keramas ?? '-' }} kali/minggu,
+
+                        ganti baju {{ $askeb->ganti_baju ?? '-' }} kali/hari,
+
+                        ganti celana dalam {{ $askeb->ganti_cd ?? '-' }} kali/hari
+
+                    </div>
+
+                </div>
+
+
+                <div>
+                    <b>F. Aktivitas seksual :</b>
+
+                    Selama hamil ibu
+                    {{ $askeb->aktivitas_seksual ?? '-' }}
+
+                </div>
+
+
+                <div>
+                    <b>G. Pola kebiasaan :</b>
+
+                    {{ $askeb->pola_kebiasaan ?? '-' }}
+
+                </div>
+
             </div>
 
             <hr class="my-6">
@@ -369,17 +443,17 @@
 
                 <div>
                     <span class="font-medium">Tradisi :</span>
-                    <p>{{ $askeb->Tradisi ?? '-' }}</p>
+                    <p>{{ $askeb->tradisi ?? '-' }}</p>
                 </div>
 
                 <div>
                     <span class="font-medium">Spiritual :</span>
-                    <p>{{ $askeb->Spiritual ?? '-' }}</p>
+                    <p>{{ $askeb->spiritual ?? '-' }}</p>
                 </div>
 
                 <div>
                     <span class="font-medium">Pengetahuan :</span>
-                    <p>{{ $askeb->Pengetahuan ?? '-' }}</p>
+                    <p>{{ $askeb->pengetahuan ?? '-' }}</p>
                 </div>
 
             </div>
@@ -394,49 +468,49 @@
             {{-- ================= PEMERIKSAAN UMUM ================= --}}
             <h4 class="font-semibold mb-3">1. Pemeriksaan Umum</h4>
 
-            <div class="grid grid-cols-2 gap-4 mb-6 text-sm">
+<div class="grid md:grid-cols-2 gap-4">
 
-                <div>
-                    <span class="font-medium">Kesadaran :</span>
-                    <p>{{ $askeb->kesadaran ?? '-' }}</p>
-                </div>
+    <div class="flex justify-between border-b py-1">
+        <span>Kesadaran</span>
+        <span>{{ $askeb->kesadaran ?? '-' }}</span>
+    </div>
 
-                <div>
-                    <span class="font-medium">Tekanan Darah :</span>
-                    <p>{{ $askeb->tekanan_darah ?? '-' }}</p>
-                </div>
+    <div class="flex justify-between border-b py-1">
+        <span>Tekanan Darah</span>
+        <span>{{ $askeb->tekanan_darah ?? '-' }} mmHg</span>
+    </div>
 
-                <div>
-                    <span class="font-medium">Denyut Nadi :</span>
-                    <p>{{ $askeb->denyut_nadi ?? '-' }}</p>
-                </div>
+    <div class="flex justify-between border-b py-1">
+        <span>Denyut Nadi</span>
+        <span>{{ $askeb->denyut_nadi ?? '-' }} x/menit</span>
+    </div>
 
-                <div>
-                    <span class="font-medium">Pernafasan :</span>
-                    <p>{{ $askeb->pernafasan ?? '-' }}</p>
-                </div>
+    <div class="flex justify-between border-b py-1">
+        <span>Pernafasan</span>
+        <span>{{ $askeb->pernafasan ?? '-' }} x/menit</span>
+    </div>
 
-                <div>
-                    <span class="font-medium">Suhu :</span>
-                    <p>{{ $askeb->suhu ?? '-' }}</p>
-                </div>
+    <div class="flex justify-between border-b py-1">
+        <span>Suhu Tubuh</span>
+        <span>{{ $askeb->suhu ?? '-' }} °C</span>
+    </div>
 
-                <div>
-                    <span class="font-medium">LILA :</span>
-                    <p>{{ $askeb->lila ?? '-' }}</p>
-                </div>
+    <div class="flex justify-between border-b py-1">
+        <span>LILA</span>
+        <span>{{ $askeb->lila ?? '-' }} cm</span>
+    </div>
 
-                <div>
-                    <span class="font-medium">Berat/Tinggi Badan :</span>
-                    <p>{{ $askeb->berat_tinggi_badan ?? '-' }}</p>
-                </div>
+    <div class="flex justify-between border-b py-1">
+        <span>Berat/Tinggi Badan</span>
+        <span>{{ $askeb->berat_tinggi_badan ?? '-' }} kg/cm</span>
+    </div>
 
-                <div>
-                    <span class="font-medium">Berat Sebelum Hamil :</span>
-                    <p>{{ $askeb->berat_sebelum_hamil ?? '-' }}</p>
-                </div>
+    <div class="flex justify-between border-b py-1">
+        <span>Berat Sebelum Hamil</span>
+        <span>{{ $askeb->berat_sebelum_hamil ?? '-' }} kg</span>
+    </div>
 
-            </div>
+</div>
 
             <hr class="my-6">
 
@@ -508,7 +582,26 @@
 
             <hr class="my-6">
 
+            <h4 class="font-semibold mb-2">4. Pemeriksaan Penunjang / Laboratorium</h4>
 
+            <div class="grid grid-cols-2 gap-4 text-sm mb-4">
+
+                <div>
+                    <span class="font-medium">Tanggal :</span>
+                    <p>{{ $askeb->lab_tanggal ?? '-' }}</p>
+                </div>
+
+                <div>
+                    <span class="font-medium">Tempat :</span>
+                    <p>{{ $askeb->lab_tempat ?? '-' }}</p>
+                </div>
+
+            </div>
+
+            <div class="text-sm mb-6">
+                <span class="font-medium">Hasil :</span>
+                <p>{{ $askeb->lab_hasil ?? '-' }}</p>
+            </div>
 
             {{-- DIAGNOSIS --}}
             <h3 class="text-lg font-bold text-purple-700 mb-4">
@@ -524,15 +617,43 @@
             <p><strong>Kebutuhan Segera:</strong></p>
             <p class="mb-6">{{ $askeb->kebutuhan_segera ?? '-' }}</p>
 
-            {{-- PENATALAKSANAAN --}}
-            <h3 class="text-lg font-bold text-purple-700 mb-4">
-                D. Penatalaksanaan
-            </h3>
+<h3 class="text-lg font-bold text-purple-700 mb-4">
+    D. Penatalaksanaan
+</h3>
 
-            <p><strong>Jam:</strong> {{ $askeb->jam_penatalaksanaan ?? '-' }}</p>
-            <p>1. {{ $askeb->penatalaksanaan1 ?? '-' }}</p>
-            <p>2. {{ $askeb->penatalaksanaan2 ?? '-' }}</p>
-            <p>3. {{ $askeb->penatalaksanaandst ?? '-' }}</p>
+<div class="mb-4">
+
+    <p>
+        <span class="font-semibold">Jam :</span>
+        {{ $askeb->penatalaksanaans->first()->jam ?? '-' }}
+    </p>
+
+    <p>
+        <span class="font-semibold">Tanggal :</span>
+        {{ $askeb->penatalaksanaans->first()->tanggal ?? '-' }}
+    </p>
+
+</div>
+
+@if($askeb->penatalaksanaans->count())
+
+<ol class="list-decimal ml-6 space-y-1">
+
+@foreach($askeb->penatalaksanaans as $item)
+
+<li>
+    {{ $item->tindakan }}
+</li>
+
+@endforeach
+
+</ol>
+
+@else
+
+<p class="text-gray-500">Belum ada penatalaksanaan.</p>
+
+@endif
 
         </div>
 

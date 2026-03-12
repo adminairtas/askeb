@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+
 class Askeb extends Model
 {
     protected $fillable = [
@@ -113,6 +114,10 @@ class Askeb extends Model
         'konjugata_eksterna',
         'lingkar_panggul',
 
+        'lab_tanggal',
+        'lab_tempat',
+        'lab_hasil',
+
         // ANALISIS
         'diagnosis',
         'masalah_potensial',
@@ -123,6 +128,29 @@ class Askeb extends Model
         'penatalaksanaan1',
         'penatalaksanaan2',
         'penatalaksanaandst',
+
+        'pola_nutrisi',
+
+        'bak_frekuensi',
+        'bak_konsistensi',
+
+        'bab_frekuensi',
+        'bab_konsistensi',
+
+        'tidur_siang',
+        'tidur_malam',
+
+        'pola_aktivitas',
+
+        'mandi',
+        'gosok_gigi',
+        'keramas',
+        'ganti_baju',
+        'ganti_cd',
+
+        'aktivitas_seksual',
+
+        'pola_kebiasaan',
     ];
 
     protected $casts = [
@@ -154,5 +182,8 @@ class Askeb extends Model
         return $this->hasMany(\App\Models\AskebRevisi::class);
     }
 
-    
+    public function penatalaksanaans()
+{
+    return $this->hasMany(AskebPenatalaksanaan::class);
+}
 }

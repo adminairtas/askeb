@@ -18,7 +18,11 @@
                  class="w-20 mx-auto mb-3">
 
             <h1 class="text-xl font-bold text-gray-800">
-                E-ASKeb
+                E-ASKEB
+            </h1>
+
+                        <h1 class="text-xl font-bold text-gray-800">
+                Prodi Kebidanan 
             </h1>
 
             <p class="text-sm text-gray-500">

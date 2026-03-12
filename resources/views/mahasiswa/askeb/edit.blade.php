@@ -339,10 +339,167 @@
                     {{-- ================= POLA FUNGSIONAL KESEHATAN ================= --}}
                     <label class="font-semibold">10. Pola Fungsional Kesehatan</label>
 
-                    <div class="mb-6">
-                        <textarea name="pola_fungsional_kesehatan"
-                            class="w-full border rounded p-2"
-                            placeholder="Pola fungsional kesehatan">{{ old('pola_fungsional_kesehatan', $askeb->pola_fungsional_kesehatan) }}</textarea>
+                    <div class="space-y-4 mb-6">
+
+                        {{-- a. Pola Nutrisi --}}
+                        <div>
+                            <label class="font-medium">a. Pola nutrisi</label>
+                            <input type="text"
+                                name="pola_nutrisi"
+                                value="{{ old('pola_nutrisi', $askeb->pola_nutrisi) }}"
+                                class="w-full border rounded p-2">
+                        </div>
+
+
+                        {{-- b. Pola Eliminasi --}}
+                        <div>
+                            <label class="font-medium">b. Pola eliminasi</label>
+
+                            <div class="grid grid-cols-2 gap-4 mt-2">
+
+                                <div>
+                                    <label class="text-sm">BAK (x/hari)</label>
+                                    <input type="number"
+                                        name="bak_frekuensi"
+                                        value="{{ old('bak_frekuensi', $askeb->bak_frekuensi) }}"
+                                        class="w-full border rounded p-2">
+                                </div>
+
+                                <div>
+                                    <label class="text-sm">Konsistensi BAK</label>
+                                    <input type="text"
+                                        name="bak_konsistensi"
+                                        value="{{ old('bak_konsistensi', $askeb->bak_konsistensi) }}"
+                                        class="w-full border rounded p-2">
+                                </div>
+
+                                <div>
+                                    <label class="text-sm">BAB (x/hari)</label>
+                                    <input type="number"
+                                        name="bab_frekuensi"
+                                        value="{{ old('bab_frekuensi', $askeb->bab_frekuensi) }}"
+                                        class="w-full border rounded p-2">
+                                </div>
+
+                                <div>
+                                    <label class="text-sm">Konsistensi BAB</label>
+                                    <input type="text"
+                                        name="bab_konsistensi"
+                                        value="{{ old('bab_konsistensi', $askeb->bab_konsistensi) }}"
+                                        class="w-full border rounded p-2">
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                        {{-- c. Pola Istirahat --}}
+                        <div>
+                            <label class="font-medium">c. Pola istirahat</label>
+
+                            <div class="grid grid-cols-2 gap-4 mt-2">
+
+                                <div>
+                                    <label class="text-sm">Tidur siang (jam/hari)</label>
+                                    <input type="number"
+                                        name="tidur_siang"
+                                        value="{{ old('tidur_siang', $askeb->tidur_siang) }}"
+                                        class="w-full border rounded p-2">
+                                </div>
+
+                                <div>
+                                    <label class="text-sm">Tidur malam (jam/hari)</label>
+                                    <input type="number"
+                                        name="tidur_malam"
+                                        value="{{ old('tidur_malam', $askeb->tidur_malam) }}"
+                                        class="w-full border rounded p-2">
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                        {{-- d. Pola Aktivitas --}}
+                        <div>
+                            <label class="font-medium">d. Pola aktivitas</label>
+                            <input type="text"
+                                name="pola_aktivitas"
+                                value="{{ old('pola_aktivitas', $askeb->pola_aktivitas) }}"
+                                class="w-full border rounded p-2">
+                        </div>
+
+
+                        {{-- e. Personal Hygiene --}}
+                        <div>
+                            <label class="font-medium">e. Personal hygiene</label>
+
+                            <div class="grid grid-cols-3 gap-4 mt-2">
+
+                                <div>
+                                    <label class="text-sm">Mandi (x/hari)</label>
+                                    <input type="number"
+                                        name="mandi"
+                                        value="{{ old('mandi', $askeb->mandi) }}"
+                                        class="w-full border rounded p-2">
+                                </div>
+
+                                <div>
+                                    <label class="text-sm">Gosok gigi (x/hari)</label>
+                                    <input type="number"
+                                        name="gosok_gigi"
+                                        value="{{ old('gosok_gigi', $askeb->gosok_gigi) }}"
+                                        class="w-full border rounded p-2">
+                                </div>
+
+                                <div>
+                                    <label class="text-sm">Keramas (x/minggu)</label>
+                                    <input type="number"
+                                        name="keramas"
+                                        value="{{ old('keramas', $askeb->keramas) }}"
+                                        class="w-full border rounded p-2">
+                                </div>
+
+                                <div>
+                                    <label class="text-sm">Ganti baju (x/hari)</label>
+                                    <input type="number"
+                                        name="ganti_baju"
+                                        value="{{ old('ganti_baju', $askeb->ganti_baju) }}"
+                                        class="w-full border rounded p-2">
+                                </div>
+
+                                <div>
+                                    <label class="text-sm">Ganti celana dalam (x/hari)</label>
+                                    <input type="number"
+                                        name="ganti_cd"
+                                        value="{{ old('ganti_cd', $askeb->ganti_cd) }}"
+                                        class="w-full border rounded p-2">
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                        {{-- f. Aktivitas Seksual --}}
+                        <div>
+                            <label class="font-medium">f. Aktivitas seksual</label>
+
+                            <input type="text"
+                                name="aktivitas_seksual"
+                                value="{{ old('aktivitas_seksual', $askeb->aktivitas_seksual) }}"
+                                class="w-full border rounded p-2">
+                        </div>
+
+
+                        {{-- g. Pola Kebiasaan --}}
+                        <div>
+                            <label class="font-medium">g. Pola kebiasaan</label>
+
+                            <input type="text"
+                                name="pola_kebiasaan"
+                                value="{{ old('pola_kebiasaan', $askeb->pola_kebiasaan) }}"
+                                class="w-full border rounded p-2">
+                        </div>
+
                     </div>
 
                     <hr class="my-6">
@@ -379,19 +536,19 @@
 
                             <input type="text"
                                 name="Tradisi"
-                                value="{{ old('Tradisi', $askeb->Tradisi) }}"
+                                value="{{ old('Tradisi', $askeb->tradisi) }}"
                                 placeholder="Tradisi"
                                 class="input">
 
                             <input type="text"
                                 name="Spiritual"
-                                value="{{ old('Spiritual', $askeb->Spiritual) }}"
+                                value="{{ old('Spiritual', $askeb->spiritual) }}"
                                 placeholder="Spiritual"
                                 class="input">
 
                             <input type="text"
                                 name="Pengetahuan"
-                                value="{{ old('Pengetahuan', $askeb->Pengetahuan) }}"
+                                value="{{ old('Pengetahuan', $askeb->pengetahuan) }}"
                                 placeholder="Pengetahuan"
                                 class="input">
 
@@ -579,7 +736,40 @@
                     </div>
 
                     <hr class="my-6">
+                    <label class="font-semibold">4. Pemeriksaan Penunjang / Laboratorium</label>
 
+                    <div class="grid grid-cols-2 gap-4 mt-2 mb-4">
+
+                        <div>
+                            <label class="text-sm">Tanggal</label>
+                            <input type="date"
+                                name="lab_tanggal"
+                                value="{{ old('lab_tanggal', $askeb->lab_tanggal) }}"
+                                class="w-full border rounded p-2">
+                        </div>
+
+                        <div>
+                            <label class="text-sm">Tempat</label>
+                            <input type="text"
+                                name="lab_tempat"
+                                value="{{ old('lab_tempat', $askeb->lab_tempat) }}"
+                                class="w-full border rounded p-2">
+                        </div>
+
+                    </div>
+
+                    <div class="mb-6">
+
+                        <label class="text-sm">Hasil</label>
+
+                        <textarea
+                            name="lab_hasil"
+                            rows="3"
+                            class="w-full border rounded p-2">{{ old('lab_hasil', $askeb->lab_hasil) }}</textarea>
+
+                    </div>
+
+                    <hr class="my-6">
                     {{-- ================= ANALISIS & PENATALAKSANAAN ================= --}}
                     <h3 class="text-lg font-bold text-purple-700 mb-4">
                         C. Analisis Data
@@ -599,47 +789,107 @@
 
 
                     <h3 class="text-lg font-bold text-purple-700 mb-4">
-                        D. Penatalaksanaan
-                    </h3>
+    D. Penatalaksanaan
+</h3>
 
-                    <h4 class="font-semibold">JAM :</h4>
+<div class="grid md:grid-cols-2 gap-4 mb-6">
 
-                    <input type="time"
-                        name="jam_penatalaksanaan"
-                        value="{{ old('jam_penatalaksanaan', $askeb->jam_penatalaksanaan) }}"
-                        class="input mb-4">
+    <div>
+        <label class="font-semibold">Jam</label>
+        <input type="time"
+               name="jam_penatalaksanaan"
+               value="{{ $askeb->penatalaksanaans->first()->jam ?? '' }}"
+               class="input">
+    </div>
 
-                    <div class="grid grid-cols-2 gap-8 mb-6">
+    <div>
+        <label class="font-semibold">Tanggal</label>
+        <input type="date"
+               name="tanggal_penatalaksanaan"
+               value="{{ $askeb->penatalaksanaans->first()->tanggal ?? '' }}"
+               class="input">
+    </div>
 
-                        <div class="space-y-3">
+</div>
 
-                            <input type="text"
-                                name="penatalaksanaan1"
-                                value="{{ old('penatalaksanaan1', $askeb->penatalaksanaan1) }}"
-                                placeholder="Penatalaksana 1"
-                                class="input">
+<div class="overflow-x-auto">
 
-                            <input type="text"
-                                name="penatalaksanaan2"
-                                value="{{ old('penatalaksanaan2', $askeb->penatalaksanaan2) }}"
-                                placeholder="Penatalaksana 2"
-                                class="input">
+<table class="w-full border text-sm">
 
-                            <input type="text"
-                                name="penatalaksanaandst"
-                                value="{{ old('penatalaksanaandst', $askeb->penatalaksanaandst) }}"
-                                placeholder="Penatalaksana Dst"
-                                class="input">
+<thead class="bg-gray-100">
+<tr>
+<th class="border px-2 py-1 w-10">No</th>
+<th class="border px-2 py-1">Penatalaksanaan</th>
+<th class="border px-2 py-1 w-20">Aksi</th>
+</tr>
+</thead>
 
-                        </div>
+<tbody id="penatalaksanaan-table">
 
-                    </div>
-                </div>
+@forelse($askeb->penatalaksanaans as $index => $item)
 
+<tr>
+
+<td class="border text-center">{{ $index+1 }}</td>
+
+<td class="border p-1">
+<input type="text"
+       name="penatalaksanaan[]"
+       value="{{ $item->tindakan }}"
+       class="w-full border rounded p-2">
+</td>
+
+<td class="border text-center">
+<button type="button"
+        onclick="removeRow(this)"
+        class="bg-red-500 text-white px-2 py-1 rounded">
+Hapus
+</button>
+</td>
+
+</tr>
+
+@empty
+
+<tr>
+
+<td class="border text-center">1</td>
+
+<td class="border p-1">
+<input type="text"
+       name="penatalaksanaan[]"
+       class="w-full border rounded p-2">
+</td>
+
+<td class="border text-center">
+<button type="button"
+        onclick="removeRow(this)"
+        class="bg-red-500 text-white px-2 py-1 rounded">
+Hapus
+</button>
+</td>
+
+</tr>
+
+@endforelse
+
+</tbody>
+
+</table>
+
+<button type="button"
+        onclick="addRow()"
+        class="bg-purple-600 text-white px-3 py-1 rounded mt-3">
++ Tambah Penatalaksanaan
+</button>
+
+</div>
+                                    <div class="mt-8 text-right">
                 <button class="bg-purple-600 text-white px-6 py-2 rounded">
                     Update Laporan
                 </button>
-
+                </div>
+                </div>
             </form>
         </div>
     </div>
@@ -681,5 +931,59 @@
 
         }
     </script>
+
+    <script>
+
+function addRow(){
+
+let table = document.getElementById("penatalaksanaan-table");
+
+let rowCount = table.rows.length + 1;
+
+let row = `
+<tr>
+
+<td class="border text-center">${rowCount}</td>
+
+<td class="border p-1">
+<input type="text" name="penatalaksanaan[]" class="w-full border rounded p-2">
+</td>
+
+<td class="border text-center">
+<button type="button"
+onclick="removeRow(this)"
+class="bg-red-500 text-white px-2 py-1 rounded">
+Hapus
+</button>
+</td>
+
+</tr>
+`;
+
+table.insertAdjacentHTML('beforeend', row);
+
+}
+
+function removeRow(btn){
+
+btn.closest("tr").remove();
+
+reNumber();
+
+}
+
+function reNumber(){
+
+let table = document.getElementById("penatalaksanaan-table");
+
+for(let i=0;i<table.rows.length;i++){
+
+table.rows[i].cells[0].innerText = i+1;
+
+}
+
+}
+
+</script>
 
 </x-app-layout>

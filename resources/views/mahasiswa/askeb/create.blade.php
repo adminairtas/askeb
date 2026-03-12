@@ -8,7 +8,7 @@
             </h1>
             <p>PRODI KEBIDANAN</p>
         </div>
-
+        
         <form action="{{ route('askeb.store') }}" method="POST" class="mt-6 bg-white p-6 rounded-xl shadow">
             @csrf
 
@@ -21,6 +21,7 @@
                     <option value="" class="text-black">
                         -- Pilih Dosen --
                     </option>
+                    
 
                     @foreach($dosens as $dosen)
                     <option value="{{ $dosen->id }}" class="text-black">
@@ -31,9 +32,9 @@
                 </select>
             </div>
 
+            <hr class="my-6">
+
             <div class="mt-4">
-                <label class="block font-semibold">Isi ASKEB</label>
-                <br>
 
                 <form action="{{ route('askeb.store') }}" method="POST">
                     @csrf

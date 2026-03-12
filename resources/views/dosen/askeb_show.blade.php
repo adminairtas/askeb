@@ -10,9 +10,99 @@
 
             <p><strong>Mahasiswa:</strong> {{ $askeb->mahasiswa->name }}</p>
             <p><strong>Tanggal:</strong> {{ $askeb->created_at->format('d-m-Y') }}</p>
-            <p><strong>Status:</strong> {{ strtoupper($askeb->status) }}</p>
+            <p><strong>Status:</strong> {{ strtoupper($askeb->status) }}</p>   
+            
+<hr class="my-6">
+            {{-- STATUS ACC --}}
+@if($askeb->status != 'acc')
 
-            <hr class="my-4">
+<div class="flex gap-3 mb-4">
+
+    {{-- Tombol ACC --}}
+    <form action="{{ route('dosen.askeb.acc', $askeb->id) }}" method="POST">
+        @csrf
+        <button type="submit"
+            class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded">
+            ACC Sekarang
+        </button>
+    </form>
+
+</div>
+
+@else
+
+<div class="bg-green-100 p-3 rounded mb-4">
+    ASKEB sudah di ACC
+</div>
+
+<div class="flex gap-3 mb-4">
+
+<a href="{{ route('mahasiswa.askeb.pdf', $askeb->id) }}"
+class="bg-green-600 text-white px-4 py-2 rounded-lg shadow">
+📄 Download PDF
+</a>
+
+<a href="{{ route('askeb.print', $askeb->id) }}" 
+   target="_blank"
+   class="bg-green-600 text-white px-4 py-2 rounded">
+🖨 Print PDF
+</a>
+
+
+</div>
+
+@endif
+
+
+{{-- RIWAYAT REVISI --}}
+@if($askeb->revisis->isNotEmpty())
+
+
+
+<h3 class="font-semibold text-purple-700 mb-4">
+    Riwayat Revisi
+</h3>
+
+@foreach($askeb->revisis->sortByDesc('created_at') as $revisi)
+<div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded mb-3">
+    <p class="text-sm text-gray-600">
+        {{ $revisi->created_at->format('d-m-Y H:i') }}
+    </p>
+
+    <p class="text-gray-800 mt-2">
+        {{ $revisi->komentar }}
+    </p>
+</div>
+@endforeach
+
+@endif
+
+
+{{-- FORM REVISI (hanya jika belum ACC) --}}
+@if($askeb->status != 'acc')
+
+<hr class="my-4">
+
+<h3 class="font-semibold text-red-600 mb-2">Kirim Revisi</h3>
+
+<form action="{{ route('dosen.askeb.revisi', $askeb->id) }}" method="POST">
+    @csrf
+
+    <textarea name="komentar"
+        class="w-full border rounded p-3"
+        rows="4"
+        placeholder="Tulis komentar revisi..."></textarea>
+
+    <button type="submit"
+        class="mt-3 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded">
+        Kirim Revisi
+    </button>
+
+</form>
+
+@endif
+            
+  <hr class="my-4">     
 
             {{-- BIODATA --}}
             <h3 class="text-lg font-bold text-purple-700 mb-4">
@@ -50,12 +140,40 @@
                 <p>{{ $askeb->alamat ?? '-' }}</p>
             </div>
 
+            <h3 class="font-semibold text-lg mb-3">2. Keluhan Utama</h3>
             <div class="mb-6">
                 <strong>Keluhan Utama:</strong>
                 <p>{{ $askeb->keluhan_utama ?? '-' }}</p>
             </div>
 
             <hr class="my-6">
+
+            <h4 class="font-semibold mb-3">3. Pemeriksaan Panggul Luar</h4>
+
+            <div class="grid grid-cols-2 gap-4 mb-6 text-sm">
+
+                <div>
+                    <span class="font-medium">Distansia Spinarum :</span>
+                    <p>{{ $askeb->distansia_sinarum ?? '-' }}</p>
+                </div>
+
+                <div>
+                    <span class="font-medium">Distansia Kristarum :</span>
+                    <p>{{ $askeb->distansia_kristarum ?? '-' }}</p>
+                </div>
+
+                <div>
+                    <span class="font-medium">Konjugata Eksterna :</span>
+                    <p>{{ $askeb->konjugata_eksterna ?? '-' }}</p>
+                </div>
+
+                <div>
+                    <span class="font-medium">Lingkar Panggul :</span>
+                    <p>{{ $askeb->lingkar_panggul ?? '-' }}</p>
+                </div>
+
+            </div>
+
 
             <div class="my-6">
 
@@ -230,16 +348,95 @@
 
                     <hr class="my-6">
 
-                    <h3 class="font-semibold text-lg mb-3">
-                        10. Pola Fungsional Kesehatan
-                    </h3>
+            <h3 class="font-semibold text-lg mb-3">
+                10. Pola Fungsional Kesehatan
+            </h3>
 
-                    <div class="mb-6 text-sm">
-                        {{ $askeb->pola_fungsional_kesehatan ?? '-' }}
+            <div class="space-y-3 text-sm">
+
+                <div>
+                    <b>A. Pola nutrisi :</b>
+                    {{ $askeb->pola_nutrisi ?? '-' }}
+                </div>
+
+
+                <div>
+                    <b>B. Pola eliminasi :</b>
+
+                    <div class="ml-6">
+                        BAK : {{ $askeb->bak_frekuensi ?? '-' }} x/hari,
+                        konsistensi {{ $askeb->bak_konsistensi ?? '-' }}
                     </div>
 
-                    <hr class="my-6">
+                    <div class="ml-6">
+                        BAB : {{ $askeb->bab_frekuensi ?? '-' }} x/hari,
+                        konsistensi {{ $askeb->bab_konsistensi ?? '-' }}
+                    </div>
 
+                </div>
+
+
+                <div>
+                    <b>C. Pola istirahat :</b>
+
+                    <div class="ml-6 grid grid-cols-2">
+                        <div>
+                            Tidur siang : {{ $askeb->tidur_siang ?? '-' }} jam/hari
+                        </div>
+
+                        <div>
+                            Tidur malam : {{ $askeb->tidur_malam ?? '-' }} jam/hari
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div>
+                    <b>D. Pola aktivitas :</b>
+                    {{ $askeb->pola_aktivitas ?? '-' }}
+                </div>
+
+
+                <div>
+                    <b>E. Personal hygiene :</b>
+
+                    <div class="ml-6">
+
+                        Ibu mandi {{ $askeb->mandi ?? '-' }} kali/hari,
+
+                        gosok gigi {{ $askeb->gosok_gigi ?? '-' }} kali/hari,
+
+                        keramas {{ $askeb->keramas ?? '-' }} kali/minggu,
+
+                        ganti baju {{ $askeb->ganti_baju ?? '-' }} kali/hari,
+
+                        ganti celana dalam {{ $askeb->ganti_cd ?? '-' }} kali/hari
+
+                    </div>
+
+                </div>
+
+
+                <div>
+                    <b>F. Aktivitas seksual :</b>
+
+                    Selama hamil ibu
+                    {{ $askeb->aktivitas_seksual ?? '-' }}
+
+                </div>
+
+
+                <div>
+                    <b>G. Pola kebiasaan :</b>
+
+                    {{ $askeb->pola_kebiasaan ?? '-' }}
+
+                </div>
+
+            </div>
+
+            <hr class="my-6">
                     <h3 class="font-semibold text-lg mb-3">
                         11. Riwayat Sosial Budaya, Pengetahuan dan Spiritual
                     </h3>
@@ -432,61 +629,6 @@
                     <p>3. {{ $askeb->penatalaksanaandst ?? '-' }}</p>
 
                     <hr class="my-6">
-
-                    {{-- Tombol ACC --}}
-                    @if($askeb->status != 'acc')
-                    <form action="{{ route('dosen.askeb.acc', $askeb->id) }}" method="POST">
-                        @csrf
-                        <button type="submit"
-                            class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded mb-4">
-                            ACC Sekarang
-                        </button>
-                    </form>
-                    @else
-                    <div class="bg-green-100 p-3 rounded mb-4">
-                        ASKEB sudah di ACC
-                    </div>
-                    @endif
-
-                    @if($askeb->revisis->isNotEmpty())
-
-                    <hr class="my-6">
-
-                    <h3 class="font-semibold text-purple-700 mb-4">
-                        Riwayat Revisi
-                    </h3>
-
-                    @foreach($askeb->revisis->sortByDesc('created_at') as $revisi)
-                    <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded mb-3">
-                        <p class="text-sm text-gray-600">
-                            {{ $revisi->created_at->format('d-m-Y H:i') }}
-                        </p>
-
-                        <p class="text-gray-800 mt-2">
-                            {{ $revisi->komentar }}
-                        </p>
-                    </div>
-                    @endforeach
-
-                    @endif
-                    {{-- Form Revisi --}}
-                    @if($askeb->status != 'acc')
-                    <h3 class="font-semibold text-red-600 mb-2">Kirim Revisi</h3>
-
-                    <form action="{{ route('dosen.askeb.revisi', $askeb->id) }}" method="POST">
-                        @csrf
-
-                        <textarea name="komentar"
-                            class="w-full border rounded p-3"
-                            rows="4"
-                            placeholder="Tulis komentar revisi..."></textarea>
-
-                        <button type="submit"
-                            class="mt-3 bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded">
-                            Kirim Revisi
-                        </button>
-                    </form>
-                    @endif
 
             </div>
 

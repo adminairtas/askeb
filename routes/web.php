@@ -76,3 +76,8 @@ Route::resource('askeb', AskebController::class)
     Route::get('/mahasiswa/askeb/{id}/pdf', 
     [AskebController::class, 'downloadPdf']
 )->name('mahasiswa.askeb.pdf');
+
+Route::get('/askeb/{id}/word',[AskebController::class,'downloadWord'])
+->name('askeb.word');
+
+Route::get('/askeb/{id}/print', [AskebController::class, 'printPdf'])->name('askeb.print');
