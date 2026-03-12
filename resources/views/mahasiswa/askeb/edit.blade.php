@@ -23,16 +23,18 @@
                         <div class="grid grid-cols-2 gap-4">
                             <div>
                                 <label>Tanggal Pengkajian</label>
-                                <input type="date" name="tanggal_pengkajian"
-                                    value="{{ old('tanggal_pengkajian', $askeb->tanggal_pengkajian) }}"
-                                    class="w-full border rounded p-2">
+                                <input type="date"
+                                    name="tanggal_pengkajian"
+                                    value="{{ old('tanggal_pengkajian', optional($askeb->tanggal_pengkajian)->format('Y-m-d')) }}"
+                                    class="input">
                             </div>
 
                             <div>
                                 <label>Pukul</label>
-                                <input type="time" name="pukul"
-                                    value="{{ old('pukul', $askeb->pukul) }}"
-                                    class="w-full border rounded p-2">
+                                <input type="time"
+                                    name="pukul"
+                                    value="{{ old('pukul', optional($askeb->pukul)->format('H:i')) }}"
+                                    class="input">
                             </div>
 
                             <div>
@@ -40,14 +42,6 @@
                                 <input type="text" name="tempat"
                                     value="{{ old('tempat', $askeb->tempat) }}"
                                     class="w-full border rounded p-2">
-                            </div>
-
-                            <div>
-                                <label>Oleh</label>
-                                <input type="text" name="oleh"
-                                    value="{{ $askeb->oleh }}"
-                                    readonly
-                                    class="w-full border rounded p-2 bg-gray-100">
                             </div>
                         </div>
                     </div>
@@ -227,20 +221,18 @@
 
                         <div>
                             <label class="font-medium">HPHT</label>
-                            <input
-                                type="date"
+                            <input type="date"
                                 name="hpht"
-                                value="{{ old('hpht', $askeb->hpht) }}"
-                                class="w-full border rounded p-2">
+                                value="{{ old('hpht', optional($askeb->hpht)->format('Y-m-d')) }}"
+                                class="input">
                         </div>
 
                         <div>
                             <label class="font-medium">HPL</label>
-                            <input
-                                type="date"
+                            <input type="date"
                                 name="hpl"
-                                value="{{ old('hpl', $askeb->hpl) }}"
-                                class="w-full border rounded p-2">
+                                value="{{ old('hpl', optional($askeb->hpl)->format('Y-m-d')) }}"
+                                class="input">
                         </div>
 
                     </div>
@@ -789,106 +781,106 @@
 
 
                     <h3 class="text-lg font-bold text-purple-700 mb-4">
-    D. Penatalaksanaan
-</h3>
+                        D. Penatalaksanaan
+                    </h3>
 
-<div class="grid md:grid-cols-2 gap-4 mb-6">
+                    <div class="grid md:grid-cols-2 gap-4 mb-6">
 
-    <div>
-        <label class="font-semibold">Jam</label>
-        <input type="time"
-               name="jam_penatalaksanaan"
-               value="{{ $askeb->penatalaksanaans->first()->jam ?? '' }}"
-               class="input">
-    </div>
+                        <div>
+                            <label class="font-semibold">Jam</label>
+                            <input type="time"
+                                name="jam_penatalaksanaan"
+                                value="{{ $askeb->penatalaksanaans->first()->jam ?? '' }}"
+                                class="input">
+                        </div>
 
-    <div>
-        <label class="font-semibold">Tanggal</label>
-        <input type="date"
-               name="tanggal_penatalaksanaan"
-               value="{{ $askeb->penatalaksanaans->first()->tanggal ?? '' }}"
-               class="input">
-    </div>
+                        <div>
+                            <label class="font-semibold">Tanggal</label>
+                            <input type="date"
+                                name="tanggal_penatalaksanaan"
+                                value="{{ $askeb->penatalaksanaans->first()->tanggal ?? '' }}"
+                                class="input">
+                        </div>
 
-</div>
+                    </div>
 
-<div class="overflow-x-auto">
+                    <div class="overflow-x-auto">
 
-<table class="w-full border text-sm">
+                        <table class="w-full border text-sm">
 
-<thead class="bg-gray-100">
-<tr>
-<th class="border px-2 py-1 w-10">No</th>
-<th class="border px-2 py-1">Penatalaksanaan</th>
-<th class="border px-2 py-1 w-20">Aksi</th>
-</tr>
-</thead>
+                            <thead class="bg-gray-100">
+                                <tr>
+                                    <th class="border px-2 py-1 w-10">No</th>
+                                    <th class="border px-2 py-1">Penatalaksanaan</th>
+                                    <th class="border px-2 py-1 w-20">Aksi</th>
+                                </tr>
+                            </thead>
 
-<tbody id="penatalaksanaan-table">
+                            <tbody id="penatalaksanaan-table">
 
-@forelse($askeb->penatalaksanaans as $index => $item)
+                                @forelse($askeb->penatalaksanaans as $index => $item)
 
-<tr>
+                                <tr>
 
-<td class="border text-center">{{ $index+1 }}</td>
+                                    <td class="border text-center">{{ $index+1 }}</td>
 
-<td class="border p-1">
-<input type="text"
-       name="penatalaksanaan[]"
-       value="{{ $item->tindakan }}"
-       class="w-full border rounded p-2">
-</td>
+                                    <td class="border p-1">
+                                        <input type="text"
+                                            name="penatalaksanaan[]"
+                                            value="{{ $item->tindakan }}"
+                                            class="w-full border rounded p-2">
+                                    </td>
 
-<td class="border text-center">
-<button type="button"
-        onclick="removeRow(this)"
-        class="bg-red-500 text-white px-2 py-1 rounded">
-Hapus
-</button>
-</td>
+                                    <td class="border text-center">
+                                        <button type="button"
+                                            onclick="removeRow(this)"
+                                            class="bg-red-500 text-white px-2 py-1 rounded">
+                                            Hapus
+                                        </button>
+                                    </td>
 
-</tr>
+                                </tr>
 
-@empty
+                                @empty
 
-<tr>
+                                <tr>
 
-<td class="border text-center">1</td>
+                                    <td class="border text-center">1</td>
 
-<td class="border p-1">
-<input type="text"
-       name="penatalaksanaan[]"
-       class="w-full border rounded p-2">
-</td>
+                                    <td class="border p-1">
+                                        <input type="text"
+                                            name="penatalaksanaan[]"
+                                            class="w-full border rounded p-2">
+                                    </td>
 
-<td class="border text-center">
-<button type="button"
-        onclick="removeRow(this)"
-        class="bg-red-500 text-white px-2 py-1 rounded">
-Hapus
-</button>
-</td>
+                                    <td class="border text-center">
+                                        <button type="button"
+                                            onclick="removeRow(this)"
+                                            class="bg-red-500 text-white px-2 py-1 rounded">
+                                            Hapus
+                                        </button>
+                                    </td>
 
-</tr>
+                                </tr>
 
-@endforelse
+                                @endforelse
 
-</tbody>
+                            </tbody>
 
-</table>
+                        </table>
 
-<button type="button"
-        onclick="addRow()"
-        class="bg-purple-600 text-white px-3 py-1 rounded mt-3">
-+ Tambah Penatalaksanaan
-</button>
+                        <button type="button"
+                            onclick="addRow()"
+                            class="bg-purple-600 text-white px-3 py-1 rounded mt-3">
+                            + Tambah Penatalaksanaan
+                        </button>
 
-</div>
-                                    <div class="mt-8 text-right">
-                <button class="bg-purple-600 text-white px-6 py-2 rounded">
-                    Update Laporan
-                </button>
-                </div>
+                    </div>
+                    <div class="mt-8 text-right">
+                        <button class="bg-purple-600 text-white px-6 py-2 rounded">
+                            Update Laporan
+                        </button>
+                    </div>
                 </div>
             </form>
         </div>
@@ -933,14 +925,13 @@ Hapus
     </script>
 
     <script>
+        function addRow() {
 
-function addRow(){
+            let table = document.getElementById("penatalaksanaan-table");
 
-let table = document.getElementById("penatalaksanaan-table");
+            let rowCount = table.rows.length + 1;
 
-let rowCount = table.rows.length + 1;
-
-let row = `
+            let row = `
 <tr>
 
 <td class="border text-center">${rowCount}</td>
@@ -960,30 +951,29 @@ Hapus
 </tr>
 `;
 
-table.insertAdjacentHTML('beforeend', row);
+            table.insertAdjacentHTML('beforeend', row);
 
-}
+        }
 
-function removeRow(btn){
+        function removeRow(btn) {
 
-btn.closest("tr").remove();
+            btn.closest("tr").remove();
 
-reNumber();
+            reNumber();
 
-}
+        }
 
-function reNumber(){
+        function reNumber() {
 
-let table = document.getElementById("penatalaksanaan-table");
+            let table = document.getElementById("penatalaksanaan-table");
 
-for(let i=0;i<table.rows.length;i++){
+            for (let i = 0; i < table.rows.length; i++) {
 
-table.rows[i].cells[0].innerText = i+1;
+                table.rows[i].cells[0].innerText = i + 1;
 
-}
+            }
 
-}
-
-</script>
+        }
+    </script>
 
 </x-app-layout>

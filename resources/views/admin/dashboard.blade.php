@@ -1,34 +1,60 @@
-<x-app-layout>
+@extends('admin.layout.app')
 
-    <div class="min-h-screen bg-purple-100 p-6">
+@section('content')
 
-        <div class="max-w-6xl mx-auto">
+<h1 class="text-2xl font-bold mb-6">Dashboard Admin</h1>
 
-            <!-- Header -->
-            <div class="bg-purple-900 text-white p-6 rounded-xl shadow-lg">
-                <h1 class="text-2xl font-bold">
-                    ADMIN PANEL
-                </h1>
-                <p class="text-sm">
-                    E-ASKEB KEHAMILAN
-                </p>
-                <p class="text-sm">
-                    PRODI KEBIDANAN
-                </p>
-            </div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4">
 
-            <!-- Welcome -->
-            <div class="mt-6 bg-white p-6 rounded-xl shadow">
-                <h2 class="text-lg font-semibold text-purple-700">
-                    Selamat Datang, {{ auth()->user()->name }}
-                </h2>
-                <p class="text-gray-600 mt-2">
-                    Kelola pengguna dan sistem E-ASKEB.
-                </p>
-            </div>
-
-        </div>
-
+    <div class="bg-blue-100 p-6 rounded-xl shadow text-center">
+        <p class="text-gray-600">Total Mahasiswa</p>
+        <p class="text-3xl font-bold text-blue-700">
+            {{ $totalMahasiswa }}
+        </p>
     </div>
 
-</x-app-layout>
+    <div class="bg-purple-100 p-6 rounded-xl shadow text-center">
+        <p class="text-gray-600">Total Dosen</p>
+        <p class="text-3xl font-bold text-purple-700">
+            {{ $totalDosen }}
+        </p>
+    </div>
+
+    <div class="bg-gray-100 p-6 rounded-xl shadow text-center">
+        <p class="text-gray-600">Total Askeb</p>
+        <p class="text-3xl font-bold text-gray-700">
+            {{ $totalAskeb }}
+        </p>
+    </div>
+
+</div>
+
+
+<h2 class="text-xl font-bold mt-10 mb-4">Statistik Status Askeb</h2>
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+
+    <div class="bg-yellow-100 p-6 rounded-xl shadow text-center">
+        <p class="text-yellow-700">Review</p>
+        <p class="text-3xl font-bold text-yellow-600">
+            {{ $review }}
+        </p>
+    </div>
+
+    <div class="bg-red-100 p-6 rounded-xl shadow text-center">
+        <p class="text-red-700">Revisi</p>
+        <p class="text-3xl font-bold text-red-600">
+            {{ $revisi }}
+        </p>
+    </div>
+
+    <div class="bg-green-100 p-6 rounded-xl shadow text-center">
+        <p class="text-green-700">ACC</p>
+        <p class="text-3xl font-bold text-green-600">
+            {{ $acc }}
+        </p>
+    </div>
+
+</div>
+
+@endsection

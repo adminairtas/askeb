@@ -146,9 +146,16 @@ class AskebController extends Controller
             ->findOrFail($id);
 
         // 1️⃣ Update data utama
-        $askeb->update(
-            $request->except('_token', '_method', 'kehamilan')
-        );
+$askeb->update(
+    $request->except([
+        '_token',
+        '_method',
+        'kehamilan',
+        'penatalaksanaan',
+        'jam_penatalaksanaan',
+        'tanggal_penatalaksanaan'
+    ])
+);
 
         // hapus penatalaksanaan lama
         $askeb->penatalaksanaans()->delete();

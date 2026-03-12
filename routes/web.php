@@ -5,6 +5,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AskebController;
 use App\Http\Controllers\DosenAskebController;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\AdminMahasiswaController;
+use App\Http\Controllers\Admin\AdminDosenController;
+use App\Http\Controllers\Admin\AdminAskebController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,10 +52,6 @@ Route::middleware(['auth'])->group(function () {
         ->name('dashboard');
 });
 
-Route::middleware(['auth','role:mahasiswa'])->group(function () {
-    Route::resource('askeb', AskebController::class);
-});
-
 Route::middleware(['auth'])->group(function () {
 
     Route::get('/dosen/askeb/{id}', 
@@ -81,3 +81,46 @@ Route::get('/askeb/{id}/word',[AskebController::class,'downloadWord'])
 ->name('askeb.word');
 
 Route::get('/askeb/{id}/print', [AskebController::class, 'printPdf'])->name('askeb.print');
+
+Route::middleware(['auth','role:admin'])
+->prefix('admin')
+->name('admin.')
+->group(function(){
+
+    Route::get('/dashboard',[AdminController::class,'dashboard'])
+        ->name('dashboard');
+
+});
+
+Route::middleware(['auth','role:admin'])
+->prefix('admin')
+->name('admin.')
+->group(function(){
+
+    Route::get('/dashboard',[AdminController::class,'dashboard'])
+        ->name('dashboard');
+
+    // MAHASISWA
+    Route::resource('mahasiswa', AdminMahasiswaController::class);
+
+    // DOSEN
+    Route::resource('dosen', AdminDosenController::class);
+
+    // ASKEB
+    Route::resource('askeb', AdminAskebController::class);
+
+});
+
+use App\Http\Controllers\Admin\AdminUserController;
+
+Route::middleware(['auth','role:admin'])
+->prefix('admin')
+->name('admin.')
+->group(function(){
+
+    Route::get('/dashboard',[AdminController::class,'dashboard'])
+        ->name('dashboard');
+
+    Route::resource('users', AdminUserController::class);
+
+});

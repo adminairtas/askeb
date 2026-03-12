@@ -152,10 +152,10 @@
     <table>
         <tr>
             <td width="25%">Tanggal pengkajian</td>
-            <td width="25%">: {{ $askeb->tanggal_pengkajian ?? '-' }}</td>
+            <td width="25%">: {{ optional($askeb->tanggal_pengkajian)->format('Y-m-d') ?? '-' }}</td>
 
             <td width="15%">Pukul</td>
-            <td>: {{ $askeb->pukul ?? '-' }} WIB</td>
+            <td>: {{ optional($askeb->pukul)->format('H:i') ?? '-' }} WIB</td>
         </tr>
 
         <tr>
@@ -327,9 +327,9 @@
 
         @endforeach
 
-
     </table>
 
+    <br>
     <h4 class="subsection">6. Riwayat Kontrasepsi :</h4>
     <p class="paragraph">
         Selama hamil ibu :
