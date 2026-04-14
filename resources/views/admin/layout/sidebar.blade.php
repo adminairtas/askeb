@@ -1,63 +1,63 @@
-<div class="w-64 bg-gray-900 text-white min-h-screen p-4">
+<div>
 
-    <h2 class="text-xl font-bold mb-6">ADMIN PANEL</h2>
+    <h2 class="text-xl font-bold mb-6 text-center">
+        ISTEK ADMIN
+    </h2>
 
-    <ul class="space-y-3">
+    <ul class="space-y-2 text-sm">
 
         <li>
             <a href="{{ route('admin.dashboard') }}"
-                class="block p-2 rounded hover:bg-gray-700">
-                Dashboard
+                class="flex items-center gap-2 p-2 rounded hover:bg-purple-700 transition">
+                📊 Dashboard
             </a>
         </li>
 
         <li>
             <a href="{{ route('admin.mahasiswa.index') }}"
-                class="block p-2 rounded hover:bg-gray-700">
-                Mahasiswa
+                class="flex items-center gap-2 p-2 rounded hover:bg-purple-700 transition">
+                🎓 Mahasiswa
             </a>
         </li>
 
         <li>
             <a href="{{ route('admin.dosen.index') }}"
-                class="block p-2 rounded hover:bg-gray-700">
-                Dosen
+                class="flex items-center gap-2 p-2 rounded hover:bg-purple-700 transition">
+                👨‍🏫 Dosen
             </a>
         </li>
 
         <li>
             <a href="{{ route('admin.askeb.index') }}"
-                class="block p-2 rounded hover:bg-gray-700">
-                Data Askeb
+                class="flex items-center gap-2 p-2 rounded hover:bg-purple-700 transition">
+                📁 Data Askeb
             </a>
         </li>
 
         <li>
             <a href="{{ route('admin.users.index') }}"
-                class="block p-2 rounded hover:bg-gray-700">
-                Users
+                class="flex items-center gap-2 p-2 rounded hover:bg-purple-700 transition">
+                👤 Users
             </a>
         </li>
-        
-        <li>
-<div class="flex items-center gap-3">
 
-    <span class="text-sm text-gray-700">
-        {{ auth()->user()->name }}
-    </span>
+        <li class="pt-4 border-t border-purple-700">
 
-    <form method="POST" action="{{ route('logout') }}">
-        @csrf
+            <div class="text-xs text-gray-300 mb-2">
+                {{ auth()->user()->name }}
+            </div>
 
-        <button
-            class="bg-red-500 hover:bg-red-600 text-white px-3 py-1.5 rounded-lg text-sm">
-            Logout
-        </button>
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
 
-    </form>
+                <button
+                    class="w-full bg-red-500 hover:bg-red-600 text-white py-1.5 rounded text-sm">
+                    Logout
+                </button>
+            </form>
 
-</div>
         </li>
+
     </ul>
 
 </div>

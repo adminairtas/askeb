@@ -58,7 +58,7 @@
                     <tbody>
                         @forelse ($askebs as $askeb)
                         <tr class="border-b">
-                            <td class="px-6 py-3">{{ $loop->iteration }}</td>
+                            <td class="px-6 py-3">{{ $askebs->count() - $loop->index }}</td>
                             <td class="px-6 py-3">{{ $askeb->nama_ibu}}</td>
                             <td class="px-6 py-3">{{ $askeb->created_at->format('d-m-Y') }}</td>
                             <td class="px-6 py-3">

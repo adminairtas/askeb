@@ -182,8 +182,13 @@ class Askeb extends Model
         return $this->hasMany(\App\Models\AskebRevisi::class);
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function penatalaksanaans()
-{
-    return $this->hasMany(AskebPenatalaksanaan::class);
-}
+    {
+        return $this->hasMany(AskebPenatalaksanaan::class);
+    }
 }

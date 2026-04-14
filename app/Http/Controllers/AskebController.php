@@ -120,12 +120,21 @@ class AskebController extends Controller
             'dosen',
             'obstetris',
             'penatalaksanaans',
-            'revisis'   // ⬅ TAMBAHKAN INI
+            'revisis'
         ])
             ->where('mahasiswa_id', auth()->id())
             ->findOrFail($id);
 
-        return view('mahasiswa.askeb.show', compact('askeb'));
+        // 🔥 AMBIL SEMUA DATA MILIK MAHASISWA (URUT DARI AWAL)
+        $allAskeb = Askeb::where('mahasiswa_id', auth()->id())
+            ->orderBy('id', 'asc') // urutan dibuat
+            ->pluck('id');
+
+        // 🔥 CARI NOMOR URUT DATA INI
+        $no = $allAskeb->search($askeb->id) + 1;
+        $no = str_pad($no, 3, '0', STR_PAD_LEFT);
+
+        return view('mahasiswa.askeb.show', compact('askeb', 'no'));
     }
 
 
@@ -146,16 +155,16 @@ class AskebController extends Controller
             ->findOrFail($id);
 
         // 1️⃣ Update data utama
-$askeb->update(
-    $request->except([
-        '_token',
-        '_method',
-        'kehamilan',
-        'penatalaksanaan',
-        'jam_penatalaksanaan',
-        'tanggal_penatalaksanaan'
-    ])
-);
+        $askeb->update(
+            $request->except([
+                '_token',
+                '_method',
+                'kehamilan',
+                'penatalaksanaan',
+                'jam_penatalaksanaan',
+                'tanggal_penatalaksanaan'
+            ])
+        );
 
         // hapus penatalaksanaan lama
         $askeb->penatalaksanaans()->delete();
@@ -229,7 +238,16 @@ $askeb->update(
             abort(403);
         }
 
-        $pdf = Pdf::loadView('mahasiswa.askeb.pdf', compact('askeb'));
+        // 🔥 HITUNG NOMOR SEPERTI DI SHOW()
+        $allAskeb = Askeb::where('mahasiswa_id', auth()->id())
+            ->orderBy('id', 'asc')
+            ->pluck('id');
+
+        $no = $allAskeb->search($askeb->id) + 1;
+        $no = str_pad($no, 3, '0', STR_PAD_LEFT);
+
+        // kirim ke view
+        $pdf = Pdf::loadView('mahasiswa.askeb.pdf', compact('askeb', 'no'));
 
         return $pdf->download('ASKEB-' . $askeb->id . '.pdf');
     }
@@ -452,8 +470,22 @@ $askeb->update(
             abort(403);
         }
 
-        $pdf = Pdf::loadView('mahasiswa.askeb.pdf', compact('askeb'))
-            ->setPaper('a4', 'portrait');
+        // 🔥 WAJIB ADA (INI YANG KURANG)
+        $allAskeb = Askeb::where('mahasiswa_id', auth()->id())
+            ->orderBy('id', 'asc')
+            ->pluck('id');
+
+        $no = $allAskeb->search($askeb->id) + 1;
+        $no = str_pad($no, 3, '0', STR_PAD_LEFT);
+
+        $pdf = Pdf::loadView('mahasiswa.askeb.pdf', [
+            'askeb' => $askeb,
+            'no' => $no
+        ])
+            ->setPaper('a4', 'portrait')
+            ->setOptions([
+                'isPhpEnabled' => true
+            ]);
 
         return $pdf->stream('ASKEB-' . $askeb->id . '.pdf');
     }

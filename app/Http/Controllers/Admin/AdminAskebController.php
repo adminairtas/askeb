@@ -10,7 +10,7 @@ class AdminAskebController extends Controller
 {
     public function index()
     {
-        $askeb = Askeb::latest()->get();
+        $askeb = Askeb::with('user')->latest()->get();
 
         return view('admin.askeb.index', compact('askeb'));
     }

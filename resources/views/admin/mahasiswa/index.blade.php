@@ -2,30 +2,36 @@
 
 @section('content')
 
-<h1 class="text-xl font-bold mb-4">Data Mahasiswa</h1>
+<div class="bg-white rounded-xl shadow p-6">
 
-<table class="w-full border">
+    <h1 class="text-xl font-bold text-purple-700 mb-4">
+        Data Mahasiswa
+    </h1>
 
-<thead>
-<tr>
-<th class="border p-2">Nama</th>
-<th class="border p-2">Email</th>
-</tr>
-</thead>
+    <div class="overflow-x-auto">
+        <table class="w-full text-sm">
 
-<tbody>
+            <thead class="bg-purple-50">
+                <tr>
+                    <th class="p-3 text-left">Nama</th>
+                    <th class="p-3 text-left">Email</th>
+                </tr>
+            </thead>
 
-@foreach($mahasiswa as $mhs)
+            <tbody class="divide-y">
 
-<tr>
-<td class="border p-2">{{ $mhs->name }}</td>
-<td class="border p-2">{{ $mhs->email }}</td>
-</tr>
+                @foreach($mahasiswa as $mhs)
+                <tr class="hover:bg-gray-50">
+                    <td class="p-3 font-medium">{{ $mhs->name }}</td>
+                    <td class="p-3 text-gray-600">{{ $mhs->email }}</td>
+                </tr>
+                @endforeach
 
-@endforeach
+            </tbody>
 
-</tbody>
+        </table>
+    </div>
 
-</table>
+</div>
 
 @endsection
