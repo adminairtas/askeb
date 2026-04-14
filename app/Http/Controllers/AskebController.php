@@ -229,28 +229,36 @@ class AskebController extends Controller
 
 
     public function downloadPdf($id)
-    {
-        $askeb = Askeb::with(['mahasiswa', 'dosen', 'obstetris'])
-            ->where('mahasiswa_id', auth()->id())
-            ->findOrFail($id);
+{
+    $askeb = Askeb::with(['mahasiswa', 'dosen', 'obstetris'])
+        ->where('mahasiswa_id', auth()->id())
+        ->findOrFail($id);
 
-        if ($askeb->status != 'acc') {
-            abort(403);
-        }
-
-        // 🔥 HITUNG NOMOR SEPERTI DI SHOW()
-        $allAskeb = Askeb::where('mahasiswa_id', auth()->id())
-            ->orderBy('id', 'asc')
-            ->pluck('id');
-
-        $no = $allAskeb->search($askeb->id) + 1;
-        $no = str_pad($no, 3, '0', STR_PAD_LEFT);
-
-        // kirim ke view
-        $pdf = Pdf::loadView('mahasiswa.askeb.pdf', compact('askeb', 'no'));
-
-        return $pdf->download('ASKEB-' . $askeb->id . '.pdf');
+    if ($askeb->status != 'acc') {
+        abort(403);
     }
+
+    $allAskeb = Askeb::where('mahasiswa_id', auth()->id())
+        ->orderBy('id', 'asc')
+        ->pluck('id');
+
+    $no = $allAskeb->search($askeb->id) + 1;
+    $no = str_pad($no, 3, '0', STR_PAD_LEFT);
+
+    $nama = optional($askeb->mahasiswa)->name ?? 'Tanpa Nama';
+    $nama = preg_replace('/[^A-Za-z0-9 ]/', '', $nama);
+
+    $filename = "E-ASKEB Kehamilan {$no}-{$nama}.pdf";
+
+    $pdf = Pdf::loadView('mahasiswa.askeb.pdf', [
+        'askeb' => $askeb,
+        'no' => $no
+    ])
+    ->setPaper('a4', 'portrait')
+    ->setOptions(['isPhpEnabled' => true]);
+
+    return $pdf->download($filename);
+}
 
     public function downloadWord($id)
     {
@@ -448,7 +456,6 @@ class AskebController extends Controller
 
 
 
-
     public function acc($id)
     {
         $askeb = Askeb::findOrFail($id);
@@ -460,33 +467,40 @@ class AskebController extends Controller
         return back();
     }
 
-    public function printPdf($id)
-    {
-        $askeb = Askeb::with(['mahasiswa', 'dosen', 'obstetris'])
-            ->where('mahasiswa_id', auth()->id())
-            ->findOrFail($id);
+public function printPdf($id)
+{
+    $askeb = Askeb::with(['mahasiswa', 'dosen', 'obstetris'])
+        ->where('mahasiswa_id', auth()->id())
+        ->findOrFail($id);
 
-        if ($askeb->status != 'acc') {
-            abort(403);
-        }
-
-        // 🔥 WAJIB ADA (INI YANG KURANG)
-        $allAskeb = Askeb::where('mahasiswa_id', auth()->id())
-            ->orderBy('id', 'asc')
-            ->pluck('id');
-
-        $no = $allAskeb->search($askeb->id) + 1;
-        $no = str_pad($no, 3, '0', STR_PAD_LEFT);
-
-        $pdf = Pdf::loadView('mahasiswa.askeb.pdf', [
-            'askeb' => $askeb,
-            'no' => $no
-        ])
-            ->setPaper('a4', 'portrait')
-            ->setOptions([
-                'isPhpEnabled' => true
-            ]);
-
-        return $pdf->stream('ASKEB-' . $askeb->id . '.pdf');
+    if ($askeb->status != 'acc') {
+        abort(403);
     }
+
+    // nomor urut
+    $allAskeb = Askeb::where('mahasiswa_id', auth()->id())
+        ->orderBy('id', 'asc')
+        ->pluck('id');
+
+    $no = $allAskeb->search($askeb->id) + 1;
+    $no = str_pad($no, 3, '0', STR_PAD_LEFT);
+
+    // nama mahasiswa
+    $nama = optional($askeb->mahasiswa)->name ?? 'Tanpa Nama';
+
+    // bersihkan karakter aneh
+    $nama = preg_replace('/[^A-Za-z0-9 ]/', '', $nama);
+
+    // nama file
+    $filename = "E-ASKEB Kehamilan {$no}-{$nama}.pdf";
+
+    $pdf = Pdf::loadView('mahasiswa.askeb.pdf', [
+        'askeb' => $askeb,
+        'no' => $no
+    ])
+    ->setPaper('a4', 'portrait')
+    ->setOptions(['isPhpEnabled' => true]);
+
+    return $pdf->stream($filename);
+}
 }

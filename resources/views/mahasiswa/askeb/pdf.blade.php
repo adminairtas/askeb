@@ -2,7 +2,12 @@
 <html>
 
 <head>
+    
     <meta charset="utf-8">
+
+    <title>
+        E-ASKEB Kehamilan {{ $no }} - {{ optional($askeb->mahasiswa)->name }}
+    </title>
 
     <style>
         body {
